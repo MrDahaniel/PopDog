@@ -1,0 +1,180 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: whitesmoke;
+    background-color: #454545;
+}
+
+/*
+   * Formatting the header area
+   */
+
+header {
+    height: 100px;
+    width: 100%;
+    opacity: .9;
+    margin-bottom: 25px;
+}
+
+header img.logo {
+    margin: 1rem;
+    max-width: 300px;
+}
+
+.hcontainer {
+    display: flex;
+    flex-direction: row;
+    background-color: #1c1c1c;
+    width: auto;
+    margin: 0 auto;
+    position: relative;
+}
+
+/*
+    * Centering the body content
+    */
+
+.bcontainer {
+    width: 1200px;
+    margin: auto;
+    margin-top: 5rem;
+};
+
+div.home {
+    padding: 10px 0 30px 0;
+    background-color: #E6E6FA;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+
+div.about {
+    padding: 10px 0 30px 0;
+    background-color: #E6E6FA;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+
+h2 {
+    font-size: 3em;
+    margin-top: 40px;
+    text-align: center;
+    letter-spacing: -2px;
+}
+
+h3 {
+    font-size: 1.7em;
+    font-weight: 100;
+    margin-top: 30px;
+    text-align: center;
+    letter-spacing: -1px;
+    color: #999;
+}
+
+.menu {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: 5%;
+}
+
+.menu li {
+    display: inline;
+}
+
+.menu li+li {
+    margin-left: 35px;
+}
+
+.menu li a {
+    color:whitesmoke;
+    text-decoration: none;
+}
+
+/* Login and Sign up*/
+
+.text-center{
+	color:#fff;	
+	text-transform:capitalize;
+    font-size: 23px;
+    margin: -50px 0 80px 0;
+    display: block;
+    text-align: center;
+}
+.box{
+	position:absolute;
+	left:50%;
+	top:50%;
+	transform: translate(-50%,-50%);
+    background-color: #1c1c1c;
+	border-radius:3px;
+	padding:70px 100px;
+}
+.input-container{
+	position:relative;
+	margin-bottom:25px;
+}
+.input-container label{
+	position:absolute;
+	top:0px;
+	left:0px;
+	font-size:16px;
+	color:#fff;	
+    pointer-event:none;
+	transition: all 0.5s ease-in-out;
+}
+.input-container input{ 
+  border:0;
+  border-bottom:1px solid #555;  
+  background:transparent;
+  width:100%;
+  padding:8px 0 5px 0;
+  font-size:16px;
+  color:#fff;
+}
+.input-container input:focus{ 
+ border:none;	
+ outline:none;
+ border-bottom:1px solid #e74c3c;	
+}
+.btn{
+	color:#fff;
+	background-color:#e74c3c;
+	outline: none;
+    border: 0;
+    color: #fff;
+	padding:10px 20px;
+	text-transform:capitalize;
+	margin-top:50px;
+	border-radius:2px;
+	cursor:pointer;
+	position:relative;
+}
+
+.input-container input:focus ~ label,
+.input-container input:valid ~ label{
+	top:-12px;
+	font-size:12px;
+	
+}
+
+.box select {
+    background-color: #525252;
+    padding: 5px;
+    color: white;
+    width: 100%;
+    border: none;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+    margin-bottom: 25px;
+  }
+  
+  .box select option {
+    padding: 30px;
+  }

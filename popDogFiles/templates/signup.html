@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="box">
+    <form action="{{ url_for('auth.signup') }}" method="POST" autocomplete="off">
+        <h1 class="text-center">Sign Up</h1>
+        <div class="input-container">
+            <input type="text" name="name" required>
+            <label>Nombre</label>
+        </div>
+        <div class="input-container">
+            <input type="text" name="lname" required>
+            <label>Apellido</label>
+        </div>
+        <div class="input-container">
+            <input type="text" name="age" required>
+            <label>Edad</label>
+        </div>
+        <div>
+            <label>Sexo</label>
+            <select name="sexo">
+                <option value="M">Masculino</option>
+                <option value="F">Femenino</option>
+            </select>
+        </div>
+        <div class="input-container">
+            <input type="text" name="phone" required>
+            <label>Teléfono</label>
+        </div>
+        <div class="input-container">
+            <input type="text" name="id" required>
+            <label>Cédula</label>
+        </div>
+        <div class="input-container">
+            <input type="password" name="password" required>
+            <label>Contraseña</label>
+        </div>
+
+        <button type="submit" class="btn">Submit</button>
+    </form>
+</div>
+
+{% endblock %}

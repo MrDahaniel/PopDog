@@ -1,6 +1,9 @@
 {
     "python.linting.enabled": false,
     "cSpell.enableFiletypes": [
+        "!css",
+        "!html",
+        "!plaintext",
         "!python"
     ]
 }

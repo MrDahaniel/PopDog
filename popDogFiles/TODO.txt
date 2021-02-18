@@ -1,0 +1,6 @@
+TODO:
+    Montar procedimientos para ingreso, eliminación y modificación de datos.
+    Triggers para validaciones de datos.
+    HTML y sus mondás de JS.
+    Usuarios y roles.
+    Logo momocho.

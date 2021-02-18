@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="box">
+    <form action="{{ url_for('auth.login') }}" method="POST">
+        <h1 class="text-center">login</h1>
+        <div class="input-container">
+            <input type="text" name="cedula" required="" />
+            <label>Cédula</label>
+        </div>
+        <div class="input-container">
+            <input type="password" name="password" required="" />
+            <label>Contraseña</label>
+        </div>
+        <button type="submit" class="btn">Submit</button>
+    </form>
+</div>
+
+{% endblock %}

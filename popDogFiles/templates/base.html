@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>PopDog</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+</head>
+<header>
+    <div class="hcontainer">
+        <a href="{{ url_for('main.index') }}"><img class="logo"
+                src="{{ url_for('static', filename='images/SMlogo.png') }}"></a>
+        <strong>
+            <nav>
+                <ul class="menu">
+                    <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                    <li><a href="{{ url_for('main.profile') }}">Profile</a></li>
+                    <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                    <li><a href="{{ url_for('auth.signup') }}">Sign Up</a></li>
+                    <li><a href="{{ url_for('auth.logout') }}">Log out</a></li>
+                </ul>
+            </nav>
+        </strong>
+    </div>
+</header>
+
+<body>
+    <div class="bcontainer">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+
+</html>
