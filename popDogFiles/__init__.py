@@ -1,5 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for
-from flaskext.mysql import MySQL
+from flask_mysqldb import MySQL
+import MySQLdb.cursors
+import re
+
+db = MySQL()
 
 def createApp():
     app = Flask(__name__)
@@ -8,8 +12,9 @@ def createApp():
     app.config['MYSQL_HOST'] = 'localhost'
     app.config['MYSQL_USER'] = 'root'
     app.config['MYSQL_PASSWORD'] = ''
-    app.config['MYSQL_DB'] = 'testo'
-    mysql = MySQL(app)
+    app.config['MYSQL_DB'] = 'popdogdb'
+
+    db.init_app(app)
 
     app.static_folder = 'static'
 

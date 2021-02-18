@@ -95,6 +95,26 @@ h3 {
     text-decoration: none;
 }
 
+/* Flash messages */
+
+.alert .flash {
+    background-color: #f44336; /* Red */
+  }
+
+.ok .flash {
+    background-color: green;
+}
+.flash {
+    padding: 5px;
+    color: white;
+    border-radius:3px;
+    margin-bottom: 5px;
+    width: 40%;
+    left: 50%;
+    text-align: center;
+    margin: auto;
+}
+
 /* Login and Sign up*/
 
 .text-center{
@@ -124,7 +144,6 @@ h3 {
 	left:0px;
 	font-size:16px;
 	color:#fff;	
-    pointer-event:none;
 	transition: all 0.5s ease-in-out;
 }
 .input-container input{ 
@@ -178,3 +197,4 @@ h3 {
   .box select option {
     padding: 30px;
   }
+

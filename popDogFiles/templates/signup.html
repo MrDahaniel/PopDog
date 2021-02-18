@@ -6,34 +6,30 @@
     <form action="{{ url_for('auth.signup') }}" method="POST" autocomplete="off">
         <h1 class="text-center">Sign Up</h1>
         <div class="input-container">
-            <input type="text" name="name" required>
+            <input type="text" name="name" required> 
             <label>Nombre</label>
         </div>
         <div class="input-container">
-            <input type="text" name="lname" required>
-            <label>Apellido</label>
-        </div>
-        <div class="input-container">
-            <input type="text" name="age" required>
-            <label>Edad</label>
+            <input type="date" name="fecha" value="{{ date }}" max="{{ date }}"> 
+            <label>Fecha</label>
         </div>
         <div>
             <label>Sexo</label>
-            <select name="sexo">
+            <select name="sexo" required>
                 <option value="M">Masculino</option>
                 <option value="F">Femenino</option>
             </select>
         </div>
         <div class="input-container">
-            <input type="text" name="phone" required>
+            <input type="text" name="phone" required> 
             <label>Teléfono</label>
         </div>
         <div class="input-container">
-            <input type="text" name="id" required>
-            <label>Cédula</label>
+            <input type="text" name="id" required> 
+            <label>Cédula</label>   
         </div>
         <div class="input-container">
-            <input type="password" name="password" required>
+            <input type="password" name="password" required> 
             <label>Contraseña</label>
         </div>
 

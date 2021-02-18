@@ -8,10 +8,10 @@ use popdogdb;
 create table perfiles(
     cedula int primary key, 
     nombre varchar(50) not null,
-    apellido varchar(50) not null,
-    edad int,
+    fechaNacimiento date,
     sexo varchar(1) not null,
-    teléfono varchar(15)
+    telefono varchar(15),
+    passhash varchar(150)
 );
 
 create table horario(
