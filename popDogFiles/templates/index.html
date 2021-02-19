@@ -1,5 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+    <div class="{{ category }}">
+        <div class="flash">
+            <p>{{ message }}</p>
+        </div>
+    </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
 <h1>Filler!</h1>
+
+
 {% endblock %}

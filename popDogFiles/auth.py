@@ -14,8 +14,28 @@ def login():
 
 @auth.route('/login', methods=['POST'])
 def loginPost():
-    
-    return redirect(url_for('index'))
+    #Getting form inputs
+    cedula = request.form['cedula']
+    password = request.form['password']
+
+    #Making a conn with cur to make quesries at app level
+    cur = db.connection.cursor()
+
+    #Gets passhash from the database
+    cur.execute('select nombre, passhash from perfiles where cedula=%s', [cedula])
+    data = cur.fetchone()
+
+    #If passwords are the same, logs the user in. To avoid nullpo, uses try block
+    if len(data) != 0:
+        if check_password_hash(data[1], password):
+            session['loggedin'] = True 
+            session['id'] = cedula
+            session['username'] = data[0] #username = nombre
+            flash('Bienvenido!', 'ok')
+            return redirect(url_for('main.index', session=session))
+
+    flash('Los datos ingresados son incorrectos. ¿Quizás ingresó algo incorrectamente o no está registrado?', 'alert')
+    return redirect(url_for('auth.login'))
 
 @auth.route('/signup')
 def signup():
@@ -34,6 +54,7 @@ def signupPost():
     #Making a conn with cur to make quesries at app level
     cur = db.connection.cursor()
 
+    #Checks if there is a profile already
     cur.execute('select * from perfiles where cedula=%s limit 1', [cedula])
     data = cur.fetchall()
 
@@ -43,7 +64,7 @@ def signupPost():
         return redirect(url_for('auth.login'))
 
     passhash = generate_password_hash(password, method='sha256')
-    cur.execute('insert into perfiles (cedula,nombre,fechaNacimiento,sexo,teléfono,passhash) values (%s,%s,%s,%s,%s,%s)', (cedula, name, fecha, sexo, phone, passhash))   
+    cur.execute('call createProfile(%s,%s,%s,%s,%s,%s)', (cedula, name, fecha, sexo, phone, passhash))   
     db.connection.commit()
     
     flash('Cuenta creada satisfactoriamente', 'ok')
@@ -51,4 +72,7 @@ def signupPost():
 
 @auth.route('/logout')
 def logout():
+    session.pop('loggedin', None)
+    session.pop('id', None)
+    session.pop('username', None)
     return redirect(url_for('main.index'))
