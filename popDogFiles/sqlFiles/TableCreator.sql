@@ -11,7 +11,8 @@ create table perfiles(
     fechaNacimiento date,
     sexo varchar(1) not null,
     telefono varchar(15),
-    passhash varchar(150)
+    passhash varchar(150),
+    role varchar(20)
 );
 
 create table horario(

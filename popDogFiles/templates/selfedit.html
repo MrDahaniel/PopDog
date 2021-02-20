@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+    <div class="{{ category }}">
+        <div class="flash">
+            <p>{{ message }}</p>
+        </div>
+    </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<div class="box" style="margin-top: 75px;">
+    <form action="{{ url_for('userhandle.editProfile') }}" method="POST" autocomplete="off">
+        <h1 class="text-center">Editar perfil:</h1>
+        <div class="input-container">
+            <input type="text" name="name" value="{{ profileInfo[1] }}" required> 
+            <label>Nombre completo</label>
+        </div>
+        <div class="input-container">
+            <input type="date" name="fecha" max="{{ date }}" value="{{ profileInfo[2] }}"> 
+            <label>Fecha nacimiento</label>
+        </div>
+        <div>
+            <label>Sexo</label>
+            <select name="sexo" required value="{{ profileInfo[3] }}">
+                <option value="M">Masculino</option>
+                <option value="F">Femenino</option>
+            </select>
+        </div>
+        <div class="input-container">
+            <input type="text" name="phone" value="{{ profileInfo[4] }}" required> 
+            <label>Teléfono</label>
+        </div>
+        <div class="input-container">
+            <input type="password" name="password" minlength="8" required> 
+            <label>Contraseña</label>
+        </div>
+
+        <button type="submit" class="btn">Submit</button>
+    </form>
+</div>
+
+{% endblock %}

@@ -6,9 +6,7 @@ body {
     background-color: #454545;
 }
 
-/*
-   * Formatting the header area
-   */
+/* Formatting the header area */
 
 header {
     height: 100px;
@@ -31,16 +29,15 @@ header img.logo {
     position: relative;
 }
 
-/*
-    * Centering the body content
-    */
+/* Centering the body content */
 
 .bcontainer {
     width: 1200px;
     margin: auto;
     margin-top: 5rem;
-};
+}
 
+;
 div.home {
     padding: 10px 0 30px 0;
     background-color: #E6E6FA;
@@ -91,23 +88,25 @@ h3 {
 }
 
 .menu li a {
-    color:whitesmoke;
+    color: whitesmoke;
     text-decoration: none;
 }
 
 /* Flash messages */
 
 .alert .flash {
-    background-color: #f44336; /* Red */
-  }
+    background-color: #f44336;
+    /* Red */
+}
 
 .ok .flash {
     background-color: green;
 }
+
 .flash {
     padding: 5px;
     color: white;
-    border-radius:3px;
+    border-radius: 3px;
     margin-bottom: 5px;
     width: 40%;
     left: 50%;
@@ -117,68 +116,72 @@ h3 {
 
 /* Login and Sign up*/
 
-.text-center{
-	color:#fff;	
-	text-transform:capitalize;
+.text-center {
+    color: #fff;
+    text-transform: capitalize;
     font-size: 23px;
     margin: -50px 0 80px 0;
     display: block;
     text-align: center;
 }
-.box{
-	position:absolute;
-	left:50%;
-	top:50%;
-	transform: translate(-50%,-50%);
+
+.box {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     background-color: #1c1c1c;
-	border-radius:3px;
-	padding:70px 100px;
-}
-.input-container{
-	position:relative;
-	margin-bottom:25px;
-}
-.input-container label{
-	position:absolute;
-	top:0px;
-	left:0px;
-	font-size:16px;
-	color:#fff;	
-	transition: all 0.5s ease-in-out;
-}
-.input-container input{ 
-  border:0;
-  border-bottom:1px solid #555;  
-  background:transparent;
-  width:100%;
-  padding:8px 0 5px 0;
-  font-size:16px;
-  color:#fff;
-}
-.input-container input:focus{ 
- border:none;	
- outline:none;
- border-bottom:1px solid #e74c3c;	
-}
-.btn{
-	color:#fff;
-	background-color:#e74c3c;
-	outline: none;
-    border: 0;
-    color: #fff;
-	padding:10px 20px;
-	text-transform:capitalize;
-	margin-top:50px;
-	border-radius:2px;
-	cursor:pointer;
-	position:relative;
+    border-radius: 3px;
+    padding: 70px 100px;
 }
 
-.input-container input:focus ~ label,
-.input-container input:valid ~ label{
-	top:-12px;
-	font-size:12px;
-	
+.input-container {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input-container label {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    font-size: 16px;
+    color: #fff;
+    transition: all 0.5s ease-in-out;
+}
+
+.input-container input {
+    border: 0;
+    border-bottom: 1px solid #555;
+    background: transparent;
+    width: 100%;
+    padding: 8px 0 5px 0;
+    font-size: 16px;
+    color: #fff;
+}
+
+.input-container input:focus {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #e74c3c;
+}
+
+.btn {
+    color: #fff;
+    background-color: #e74c3c;
+    outline: none;
+    border: 0;
+    color: #fff;
+    padding: 10px 20px;
+    text-transform: capitalize;
+    margin-top: 50px;
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+}
+
+.input-container input:focus~label, .input-container input:valid~label {
+    top: -12px;
+    font-size: 12px;
 }
 
 .box select {
@@ -192,9 +195,46 @@ h3 {
     appearance: button;
     outline: none;
     margin-bottom: 25px;
-  }
-  
-  .box select option {
-    padding: 30px;
-  }
+}
 
+.box select option {
+    padding: 30px;
+}
+
+/* Profile */
+
+.box .profile {
+    top: 0px;
+}
+
+.username {
+    text-align: left;
+    color: whitesmoke;
+    margin: 10px;
+    font-size: 40px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: capitalize;
+    width: 50rem;
+    bottom: 0px;
+    margin-top: auto;
+}
+
+.profile h4 {
+    margin-bottom: 3px;
+    margin-top: 10x;
+}
+
+.profile p {
+    margin-top: 3px;
+    margin-bottom: 10px;
+    text-indent: 2rem;
+}
+
+.row {
+    display: flex;
+}
+
+.column {
+    flex: 33.33%;
+    padding: 5px;
+}

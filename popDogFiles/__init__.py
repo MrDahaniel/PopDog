@@ -24,4 +24,10 @@ def createApp():
     from .main import main as mainBlueprint
     app.register_blueprint(mainBlueprint)
 
+    from .userhandle import userhandle as userhandleBlueprint
+    app.register_blueprint(userhandleBlueprint)
+
+    from .roles import roles as rolesBlueprint
+    app.register_blueprint(rolesBlueprint)
+
     return app

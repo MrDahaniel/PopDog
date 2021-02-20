@@ -1,3 +1,4 @@
+from typing import final
 from flask import Flask, Blueprint, render_template, url_for, redirect, request, session
 from flask.helpers import flash
 from flask_mysqldb import MySQL
@@ -10,6 +11,10 @@ auth = Blueprint('auth', __name__, template_folder='templates', static_folder='s
 
 @auth.route('/login')
 def login():
+    #If logged in, redirect to main page
+    if session:
+        return redirect(url_for('main.index', session=session))
+
     return render_template('login.html')
 
 @auth.route('/login', methods=['POST'])
@@ -31,14 +36,19 @@ def loginPost():
             session['loggedin'] = True 
             session['id'] = cedula
             session['username'] = data[0] #username = nombre
-            flash('Bienvenido!', 'ok')
+            flash('¡Bienvenido!', 'ok')
             return redirect(url_for('main.index', session=session))
 
+    cur.close();
+    
     flash('Los datos ingresados son incorrectos. ¿Quizás ingresó algo incorrectamente o no está registrado?', 'alert')
     return redirect(url_for('auth.login'))
 
 @auth.route('/signup')
 def signup():
+    #If logged in, redirect to main page
+    if session:
+        return redirect(url_for('main.index', session=session))
     return render_template('signup.html', date=date.today())
 
 @auth.route('/signup', methods=['POST'])
@@ -66,6 +76,7 @@ def signupPost():
     passhash = generate_password_hash(password, method='sha256')
     cur.execute('call createProfile(%s,%s,%s,%s,%s,%s)', (cedula, name, fecha, sexo, phone, passhash))   
     db.connection.commit()
+    cur.close();
     
     flash('Cuenta creada satisfactoriamente', 'ok')
     return redirect(url_for('auth.login'))
