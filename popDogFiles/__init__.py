@@ -27,6 +27,9 @@ def createApp():
     from .userhandle import userhandle as userhandleBlueprint
     app.register_blueprint(userhandleBlueprint)
 
+    from .dashboard import dashboard as dashboardBlueprint
+    app.register_blueprint(dashboardBlueprint)
+
     from .roles import roles as rolesBlueprint
     app.register_blueprint(rolesBlueprint)
 

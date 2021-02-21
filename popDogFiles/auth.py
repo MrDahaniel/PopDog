@@ -12,8 +12,8 @@ auth = Blueprint('auth', __name__, template_folder='templates', static_folder='s
 @auth.route('/login')
 def login():
     #If logged in, redirect to main page
-    if session:
-        return redirect(url_for('main.index', session=session))
+    if 'id' in session:
+        return redirect(url_for('main.index'))
 
     return render_template('login.html')
 
@@ -37,7 +37,7 @@ def loginPost():
             session['id'] = cedula
             session['username'] = data[0] #username = nombre
             flash('¡Bienvenido!', 'ok')
-            return redirect(url_for('main.index', session=session))
+            return redirect(url_for('main.index'))
 
     cur.close();
     
@@ -48,7 +48,7 @@ def loginPost():
 def signup():
     #If logged in, redirect to main page
     if session:
-        return redirect(url_for('main.index', session=session))
+        return redirect(url_for('main.index'))
     return render_template('signup.html', date=date.today())
 
 @auth.route('/signup', methods=['POST'])

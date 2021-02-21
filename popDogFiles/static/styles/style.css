@@ -203,7 +203,7 @@ h3 {
 
 /* Profile */
 
-.box .profile {
+.box .profile, .box .editRoles {
     top: 0px;
 }
 
@@ -214,17 +214,17 @@ h3 {
     font-size: 40px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: capitalize;
-    width: 50rem;
+    width: 500px;
     bottom: 0px;
     margin-top: auto;
 }
 
-.profile h4 {
+.profile h4, .editRoles h4 {
     margin-bottom: 3px;
     margin-top: 10x;
 }
 
-.profile p {
+.profile p, .editRoles p {
     margin-top: 3px;
     margin-bottom: 10px;
     text-indent: 2rem;
@@ -237,4 +237,44 @@ h3 {
 .column {
     flex: 33.33%;
     padding: 5px;
+}
+
+.column a {
+    text-decoration: none;
+    color: whitesmoke;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: auto;
+    justify-content: center;
+}
+
+.column .block {
+    background-color: gray;
+    text-align: center;
+    padding: 15px;
+    height: 50px;
+}
+
+/* Tablas */
+
+.basicTable {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.basicTable td, .basicTable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.basicTable tr:hover {
+    background-color: rgb(116, 21, 21);
+}
+
+.basicTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #e74c3c;
+    color: white;
 }

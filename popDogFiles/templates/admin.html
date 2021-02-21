@@ -2,23 +2,24 @@
 
 {% block content %}
 
-<div class="box" style="padding-top: -100px;">
 {% with messages = get_flashed_messages(with_categories=true) %}
 {% if messages %}
 {% for category, message in messages %}
-    <div class="{{ category }}" style="margin-top: -50px;">
-        <div class="flash">
-            <p>{{ message }}</p>
-        </div>
+<div class="{{ category }}" style="margin-top: 50px;">
+    <div class="flash">
+        <p>{{ message }}</p>
     </div>
+</div>
 {% endfor %}
 {% endif %}
 {% endwith %}
+
+<div class="box" style="padding-top: -100px;">
     <div class="profile">
         <div class="row">
             <div class="username">
                 <div class="column">
-                    {{ profileInfo[1] }}
+                    Dashboard
                 </div>
             </div>
             <div class="column">
@@ -27,26 +28,52 @@
             </div>
         </div>
         <hr>
-        <h4>Cédula:</h4>
-        <p>{{ profileInfo[0] }}</p>
-        <h4>Fecha de nacimiento:</h4>
-        <p>{{profileInfo[2]}}</p>
-        <h4>Sexo:</h4>
-        {% if (profileInfo[3] == 'M') %}
-        <p>Masculino</p>
-        {% else %}
-        <p>Femenino</p>
-        {% endif %}
-        <h4>Teléfono:</h4>
-        <p>{{ profileInfo[4] }}</p>
-        <h4>Rol:</h4>
-        {% if profileInfo[6] != None %}
-        <p>{{ profileInfo[6] }} </p>
-        {% else %}
-        <p>Sin rol asignado</p>
-        {% endif %}
-
-        <a href="/profile/edit"><button type="button" class="btn">Editar perfil</button></a>
+        <div class="row">
+            <div class="column">
+                <a href="{{ url_for('roles.editRoles') }}">
+                    <div class="block">
+                        <strong>Modificar roles</strong>
+                    </div>
+                </a>
+            </div>
+            <div class="column">
+                <a href="">
+                    <div class="block">
+                        <strong>Buscar personal</strong>
+                    </div>
+                </a>
+            </div>
+            <div class="column">
+                <a href="">
+                    <div class="block">
+                        <strong>Asignar ubicación</strong>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <a href="">
+                    <div class="block">
+                        <strong>Crear orden inventario</strong>
+                    </div>
+                </a>
+            </div>
+            <div class="column">
+                <a href="">
+                    <div class="block">
+                        <strong>Buscar paciente</strong>
+                    </div>
+                </a>
+            </div>
+            <div class="column">
+                <a href="">
+                    <div class="block">
+                        <strong>Eliminar perfiles</strong>
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 

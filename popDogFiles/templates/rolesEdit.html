@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+<div class="{{ category }}" style="margin-top: 50px;">
+    <div class="flash">
+        <p>{{ message }}</p>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="box" style="padding-top: -100px;">
+    <div class="editRoles">
+        <div class="row">
+            <div class="username">
+                <div class="column">
+                    Edit Roles
+                </div>
+            </div>
+            <div class="column">
+                <img style="width: 200px; margin-right: -100px;"
+                    src="{{ url_for('static', filename='images/SMlogo.png') }}">
+            </div>
+        </div>
+        <hr>
+        <form action="{{ url_for('roles.editRoles') }}" method="POST">
+            <div class="input-container" style="margin-top: 50px;">
+                <div class="row">
+                    <div class="column">
+                        <input type="text" name="cedula" style="margin-top: auto;" value="{{ search }}" required>
+                        <label>Buscar por cédula</label>
+                    </div>
+                    <div class="column" style="flex: none;">
+                        <button type="submit" class="btn" style="margin-top: auto;">Submit</button>
+                    </div>
+                    <div class="column" style="flex: none;">
+                        <a href="/roles/edit"><button type="button" class="btn" style="margin-top: auto;">Reset</button></a>
+                    </div>
+                </div>
+                <hr>
+                <table class="basicTable">
+                    <thead>
+                        <tr>
+                            <th> Cédula </th>
+                            <th> Nombre </th>
+                            <th> Teléfono </th>
+                            <th> Rol </th>
+                        </tr>
+                    </thead>
+                    {% for perfil in roleless %}
+                    <tr>
+                        <td> {{perfil.0}} </td>
+                        <td> {{perfil.1}} </td>
+                        <td> {{perfil.2}} </td>
+                        {% if perfil.3 is none %}
+                        <td><a href="{{ url_for('roles.giveRole',cedula=perfil.0) }}"  style="color: whitesmoke;">Añadir rol</a></td>
+                        {% elif perfil.0 == search | int %}
+                        <td>{{ perfil.3 }}</td>
+                        {% else %}
+                        <td><a href="{{ url_for('roles.giveRole',cedula=perfil.0) }}"  style="color: whitesmoke;">{{ perfil.3 }}</a></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </form>
+    </div>
+{% endblock %}

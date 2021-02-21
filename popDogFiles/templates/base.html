@@ -12,11 +12,12 @@
         <strong>
             <nav>
                 <ul class="menu">
-                    <li><a href="{{ url_for('main.index') }}">Home</a></li>
                     {% if session['loggedin'] %}
+                        <li><a href="{{ url_for('main.index') }}">Dashboard</a></li>
                         <li><a href="{{ url_for('main.profile') }}">{{ session['username'] }}</a></li>
                         <li><a href="{{ url_for('auth.logout') }}">Log out</a></li>
                     {% else %}
+                        <li><a href="{{ url_for('main.index') }}">Home</a></li>
                         <li><a href="{{ url_for('auth.login') }}">Login</a></li>
                         <li><a href="{{ url_for('auth.signup') }}">Sign Up</a></li>
                     {% endif %}

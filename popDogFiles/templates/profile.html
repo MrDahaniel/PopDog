@@ -2,18 +2,18 @@
 
 {% block content %}
 
-<div class="box" style="padding-top: -100px;">
-{% with messages = get_flashed_messages(with_categories=true) %}
-{% if messages %}
-{% for category, message in messages %}
+<div class="box" style="padding-top: -100px; margin-top: 50px;">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
     <div class="{{ category }}" style="margin-top: -50px;">
         <div class="flash">
             <p>{{ message }}</p>
         </div>
     </div>
-{% endfor %}
-{% endif %}
-{% endwith %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
     <div class="profile">
         <div class="row">
             <div class="username">
@@ -26,25 +26,27 @@
                     src="{{ url_for('static', filename='images/SMlogo.png') }}">
             </div>
         </div>
-        <hr>
-        <h4>Cédula:</h4>
-        <p>{{ profileInfo[0] }}</p>
-        <h4>Fecha de nacimiento:</h4>
-        <p>{{profileInfo[2]}}</p>
-        <h4>Sexo:</h4>
-        {% if (profileInfo[3] == 'M') %}
-        <p>Masculino</p>
-        {% else %}
-        <p>Femenino</p>
-        {% endif %}
-        <h4>Teléfono:</h4>
-        <p>{{ profileInfo[4] }}</p>
-        <h4>Rol:</h4>
-        {% if profileInfo[6] != None %}
-        <p>{{ profileInfo[6] }} </p>
-        {% else %}
-        <p>Sin rol asignado</p>
-        {% endif %}
+        <div>
+            <hr>
+            <h4>Cédula:</h4>
+            <p>{{ profileInfo[0] }}</p>
+            <h4>Fecha de nacimiento:</h4>
+            <p>{{profileInfo[2]}}</p>
+            <h4>Sexo:</h4>
+            {% if (profileInfo[3] == 'M') %}
+            <p>Masculino</p>
+            {% else %}
+            <p>Femenino</p>
+            {% endif %}
+            <h4>Teléfono:</h4>
+            <p>{{ profileInfo[4] }}</p>
+            <h4>Rol:</h4>
+            {% if profileInfo[5] != None %}
+            <p>{{ profileInfo[5] }} </p>
+            {% else %}
+            <p>Sin rol asignado</p>
+            {% endif %}
+        </div>
 
         <a href="/profile/edit"><button type="button" class="btn">Editar perfil</button></a>
     </div>

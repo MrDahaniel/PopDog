@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="box">
+    <div class="editRoles">
+        <div class="row">
+            <div class="username">
+                <div class="column">
+                    Edit Roles
+                </div>
+            </div>
+            <div class="column">
+                <img style="width: 200px; margin-right: -100px;"
+                    src="{{ url_for('static', filename='images/SMlogo.png') }}">
+            </div>
+        </div>
+        <hr>
+        <form action="{{ url_for('roles.giveRole', cedula=profileInfo[0]) }}" method="POST">
+            <h4>Usuario: {{ profileInfo[1] }}</h4> 
+            <label>Cédula: {{ profileInfo[0] }}</label> 
+            <hr>
+            <Label>Rol a asignar</Label>
+            <select name="rol">
+                <option value="Médico">Médico</option>
+                <option value="Enfermero">Enfermero</option>
+                <option value="Ingeniero">Ingeniero</option>
+                <option value="Servicios">Servicios Generales</option>
+                <option value="Administrativo">Administrativo</option>
+                <option value="Paciente">Paciente</option>
+            </select>
+            <button type="submit" class="btn" style="margin-top: auto;">Submit</button>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}
