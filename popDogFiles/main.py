@@ -7,7 +7,6 @@ main = Blueprint('main', __name__, template_folder='templates', static_folder='s
 @main.route('/')
 def index():
     if session and not 'id' in session:
-        print(session)
         session.clear()
         flash('Error al iniciar sesión, error de cookies. De seguir sucediendo, limpie las cookies de su navegador', 'alert')
         return redirect(url_for('auth.login'))

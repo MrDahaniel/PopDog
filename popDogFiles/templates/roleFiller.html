@@ -16,7 +16,72 @@
             </div>
         </div>
         <hr>
-        
+        <form action="{{ url_for('roles.roleFiller',cedula=cedula, rol=rol) }}", method="POST">
+            <h4>Usuario: {{ nombre.0 }}</h4> 
+            <label>Cédula: {{ cedula }}</label> 
+            <hr>
+            {% if rol == 'Médico' %}
+            <div>
+                <label>Especialidad</label>
+                <select name="especialidad" required>
+                    {% for especialidad in especialidades %}
+                        <option value="{{ especialidad.0 }}">{{ especialidad.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label>Horario</label>
+                <select name="horario" required>
+                    {% for horario in horarios %}
+                        <option value="{{ horario.0 }}">{{ horario.1 }} - {{ horario.2 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            {% elif rol == 'Enfermero' or rol == 'Ingeniero' or rol == 'Servicios' %}
+            <div>
+                <label>Horario</label>
+                <select name="horario" required>
+                    {% for horario in horarios %}
+                        <option value="{{ horario.0 }}">{{ horario.1 }} - {{ horario.2 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            {% elif rol == 'Administrativo' %}
+            <div>
+                <label>Horario</label>
+                <select name="horario" required>
+                    {% for horario in horarios %}
+                    <option value="{{ horario.0 }}">{{ horario.1 }} - {{ horario.2 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <div class="input-container">
+                    <input type="text" name="area" required> 
+                    <label>Área</label>
+                </div>
+            </div>
+            
+            {% elif rol == 'Paciente' %}
+            <div>
+                <label>Horario</label>
+                <select name="eps" required>
+                    {% for ep in eps %}
+                    <option value="{{ ep.0 }}">{{ ep.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <div class="input-container">
+                    <input type="text" name="peso" required> 
+                    <label>Peso (Kg) </label>
+                </div>
+            </div>
+            {% endif %}
+            <button type="submit" class="btn">Submit</button>
+        </form>
     </div>
 </div>
 

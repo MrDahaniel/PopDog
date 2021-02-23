@@ -7,7 +7,7 @@
         "!python"
     ],
     "AllAutocomplete.showCurrentDocument": true,
-    "workbench.colorTheme": "BeardedTheme Black & Ruby",
+    "workbench.colorTheme": "BeardedTheme Black & Amethyst",
     "themeRandomizer.themes.blacklist": [
         "Gruvbox Light Soft",
         "BeardedTheme Solarized Light",

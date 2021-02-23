@@ -59,7 +59,7 @@
                         <td> {{perfil.2}} </td>
                         {% if perfil.3 is none %}
                         <td><a href="{{ url_for('roles.giveRole',cedula=perfil.0) }}"  style="color: whitesmoke;">Añadir rol</a></td>
-                        {% elif perfil.0 == search | int %}
+                        {% elif perfil.0 == session['id'] | int %}
                         <td>{{ perfil.3 }}</td>
                         {% else %}
                         <td><a href="{{ url_for('roles.giveRole',cedula=perfil.0) }}"  style="color: whitesmoke;">{{ perfil.3 }}</a></td>

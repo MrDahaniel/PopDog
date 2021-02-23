@@ -8,7 +8,7 @@ dashboard = Blueprint('dashboard', __name__, template_folder='templates', static
 @dashboard.route('/dashboard')
 def dash():
     if not session:
-        return redirect(url_for('auth.login', session=session))
+        return redirect(url_for('auth.login'))
 
     cur = db.connection.cursor()
     cur.execute('call getRole(%s)', [session['id']])
@@ -48,7 +48,7 @@ def admin():
         flash('No se tienen los permisos suficientes para acceder a esta página', 'alert')
         return redirect(url_for('main.index'))
 
-    return render_template('admin.html', profileInfo=profileInfo)
+    return render_template('adminDashboard.html', profileInfo=profileInfo)
 
 #@dashboard.route()
 #def medic():

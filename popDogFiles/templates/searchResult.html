@@ -1,0 +1,279 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="box">
+    <div class="editRoles">
+        <div class="row">
+            <div class="username">
+                <div class="column">
+                    Buscar personas
+                </div>
+            </div>
+            <div class="column">
+                <img style="width: 200px; margin-right: -100px;"
+                    src="{{ url_for('static', filename='images/SMlogo.png') }}">
+            </div>
+        </div>
+        <hr>
+        {% if role == 'Administrativo' %}
+        <div class="row">
+            <div class="column">
+                <h4>Cédula:</h4>
+                <p>{{ profileInfo[0] }}</p>
+            </div>
+            <div class="column">
+                <h4>Nombre:</h4>
+                <p>{{ profileInfo[1] }}</p>
+            </div>
+            <div class="column">
+                <h4>Fecha de nacimiento:</h4>
+                <p>{{profileInfo[2]}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h4>Sexo:</h4>
+                {% if (profileInfo[3] == 'M') %}
+                <p>Masculino</p>
+                {% else %}
+                <p>Femenino</p>
+                {% endif %}
+            </div>
+            <div class="column">
+                <h4>Teléfono:</h4>
+                <p>{{ profileInfo[4] }}</p>
+            </div>
+            <div class="column">
+                <h4>Rol:</h4>
+                {% if profileInfo[6] != None %}
+                <p>{{ profileInfo[6] }} </p>
+                {% else %}
+                <p>Sin rol asignado</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h4>Id Administrativo:</h4>
+                <p>{{ profileInfo[7] }}</p>
+            </div>
+            <div class="column">
+                <h4>Horario:</h4>
+                <p>{{ horario[0] }} - {{ horario[1] }}</p>
+            </div>
+            <div class="column">
+                <h4>Area:</h4>
+                <p>{{ profileInfo[10] }}</p>
+            </div>
+        </div>
+
+        {% elif role == 'Médico' %}
+        <div class="row">
+            <div class="column">
+                <h4>Cédula:</h4>
+                <p>{{ profileInfo[0] }}</p>
+            </div>
+            <div class="column">
+                <h4>Nombre:</h4>
+                <p>{{ profileInfo[1] }}</p>
+            </div>
+            <div class="column">
+                <h4>Fecha de nacimiento:</h4>
+                <p>{{profileInfo[2]}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h4>Sexo:</h4>
+                {% if (profileInfo[3] == 'M') %}
+                <p>Masculino</p>
+                {% else %}
+                <p>Femenino</p>
+                {% endif %}
+            </div>
+            <div class="column">
+                <h4>Teléfono:</h4>
+                <p>{{ profileInfo[4] }}</p>
+            </div>
+            <div class="column">
+                <h4>Rol:</h4>
+                {% if profileInfo[6] != None %}
+                <p>{{ profileInfo[6] }} </p>
+                {% else %}
+                <p>Sin rol asignado</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h4>Id Médico:</h4>
+                <p>{{ profileInfo[7] }}</p>
+            </div>
+            <div class="column">
+                <h4>Horario:</h4>
+                <p>{{ horario[0] }} - {{ horario[1] }}</p>
+            </div>
+            <div class="column">
+                <h4>Especialidad:</h4>
+                <p>{{ especialidad }}</p>
+            </div>
+        </div>
+
+        {% elif role == 'Enfermero' %}
+        <div class="row">
+            <div class="column">
+                <h4>Cédula:</h4>
+                <p>{{ profileInfo[0] }}</p>
+            </div>
+            <div class="column">
+                <h4>Nombre:</h4>
+                <p>{{ profileInfo[1] }}</p>
+            </div>
+            <div class="column">
+                <h4>Fecha de nacimiento:</h4>
+                <p>{{profileInfo[2]}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h4>Sexo:</h4>
+                {% if (profileInfo[3] == 'M') %}
+                <p>Masculino</p>
+                {% else %}
+                <p>Femenino</p>
+                {% endif %}
+            </div>
+            <div class="column">
+                <h4>Teléfono:</h4>
+                <p>{{ profileInfo[4] }}</p>
+            </div>
+            <div class="column">
+                <h4>Rol:</h4>
+                {% if profileInfo[6] != None %}
+                <p>{{ profileInfo[6] }} </p>
+                {% else %}
+                <p>Sin rol asignado</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h4>Id Enfermero:</h4>
+                <p>{{ profileInfo[7] }}</p>
+            </div>
+            <div class="column">
+                <h4>Horario:</h4>
+                <p>{{ horario[0] }} - {{ horario[1] }}</p>
+            </div>
+            <div class="column">
+                <h4>Ubicación:</h4>
+                <p>{{ ubicacion[0] }}, {{ ubicacion[1] }} {{ ubicacion[2] }}</p>
+            </div>
+        </div>
+
+        {% elif role == 'Ingeniero' %}
+        <div class="row">
+            <div class="column">
+                <h4>Cédula:</h4>
+                <p>{{ profileInfo[0] }}</p>
+            </div>
+            <div class="column">
+                <h4>Nombre:</h4>
+                <p>{{ profileInfo[1] }}</p>
+            </div>
+            <div class="column">
+                <h4>Fecha de nacimiento:</h4>
+                <p>{{profileInfo[2]}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h4>Sexo:</h4>
+                {% if (profileInfo[3] == 'M') %}
+                <p>Masculino</p>
+                {% else %}
+                <p>Femenino</p>
+                {% endif %}
+            </div>
+            <div class="column">
+                <h4>Teléfono:</h4>
+                <p>{{ profileInfo[4] }}</p>
+            </div>
+            <div class="column">
+                <h4>Rol:</h4>
+                {% if profileInfo[6] != None %}
+                <p>{{ profileInfo[6] }} </p>
+                {% else %}
+                <p>Sin rol asignado</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h4>Id Ingeniero:</h4>
+                <p>{{ profileInfo[7] }}</p>
+            </div>
+            <div class="column">
+                <h4>Horario:</h4>
+                <p>{{ horario[0] }} - {{ horario[1] }}</p>
+            </div>
+        </div>
+        {% elif role == 'Paciente' %}
+
+        {% elif role == 'Servicios' %}
+        <div class="row">
+            <div class="column">
+                <h4>Cédula:</h4>
+                <p>{{ profileInfo[0] }}</p>
+            </div>
+            <div class="column">
+                <h4>Nombre:</h4>
+                <p>{{ profileInfo[1] }}</p>
+            </div>
+            <div class="column">
+                <h4>Fecha de nacimiento:</h4>
+                <p>{{profileInfo[2]}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h4>Sexo:</h4>
+                {% if (profileInfo[3] == 'M') %}
+                <p>Masculino</p>
+                {% else %}
+                <p>Femenino</p>
+                {% endif %}
+            </div>
+            <div class="column">
+                <h4>Teléfono:</h4>
+                <p>{{ profileInfo[4] }}</p>
+            </div>
+            <div class="column">
+                <h4>Rol:</h4>
+                {% if profileInfo[6] != None %}
+                <p>{{ profileInfo[6] }} </p>
+                {% else %}
+                <p>Sin rol asignado</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h4>Id Servicios Generales:</h4>
+                <p>{{ profileInfo[7] }}</p>
+            </div>
+            <div class="column">
+                <h4>Horario:</h4>
+                <p>{{ horario[0] }} - {{ horario[1] }}</p>
+            </div>
+        </div>
+        {% else %}
+
+        {% endif %}
+        <a href="{{ url_for('search.searchRedirector') }}"><button type="button" class="btn"
+                style="margin-top: auto;">Volver</button></a>
+    </div>
+</div>
+
+{% endblock %}

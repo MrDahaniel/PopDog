@@ -33,4 +33,7 @@ def createApp():
     from .roles import roles as rolesBlueprint
     app.register_blueprint(rolesBlueprint)
 
+    from .search import search as searchBlueprint
+    app.register_blueprint(searchBlueprint)
+
     return app

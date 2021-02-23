@@ -44,7 +44,7 @@ create table especialidad(
 );
 
 create table medico(
-    idMédico serial primary key, 
+    idMedico serial primary key, 
     cedula int references perfiles(cedula),
     idEspecialidad int references especialidad(idEspecialidad),
     idHorario int references horario(idHorario)
@@ -127,7 +127,7 @@ create table EPS(
 );
 
 create table historialMedico(
-    idHistorial serial primary key,
+    idHistorial int primary key,
     fechaSubida date not null,
     documento blob 
 );
