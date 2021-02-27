@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="column">
-                <img style="width: 200px; margin-right: -100px;"
+                <img style="width: 200px; margin-right: 250px;"
                     src="{{ url_for('static', filename='images/SMlogo.png') }}">
             </div>
         </div>
@@ -32,7 +32,7 @@
             <div class="column">
                 <a href="{{ url_for('roles.editRoles') }}">
                     <div class="block">
-                        <strong>Modificar roles</strong>
+                        <strong>Agregar y Modificar Roles</strong>
                     </div>
                 </a>
             </div>
@@ -44,18 +44,18 @@
                 </a>
             </div>
             <div class="column">
-                <a href="">
+                <a href="{{ url_for('location.searchLocation') }}">
                     <div class="block">
-                        <strong>Asignar ubicación</strong>
+                        <strong>Asignar y Modificar Ubicación</strong>
                     </div>
                 </a>
             </div>
         </div>
         <div class="row">
             <div class="column">
-                <a href="">
+                <a href="{{ url_for('inventory.inv')}}">
                     <div class="block">
-                        <strong>Crear orden inventario</strong>
+                        <strong>Revisar inventario</strong>
                     </div>
                 </a>
             </div>

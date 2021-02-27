@@ -95,7 +95,6 @@ create table ordenMantenimiento(
 create table proveedores(
     idProveedor serial primary key,
     nombre varchar(50) not null,
-    sectorEmp varchar(50) not null,
     direccion varchar(150) not null
 );
 
@@ -110,14 +109,14 @@ create table item(
     idItem serial primary key,
     idProveedor int references proveedores(idProveedor),
     nombre varchar(150),
-    costoUnidad float
+    cantidad int
 );
 
 create table Pedidos(
     idPedido serial primary key,
     idItem int references item(idItem),
     idAdministrativo int references administrativos(idAdministrativo),
-    canitidad int not null, 
+    cantidad int not null, 
     fecha date 
 );
 

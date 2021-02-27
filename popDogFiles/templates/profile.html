@@ -2,30 +2,327 @@
 
 {% block content %}
 
-<div class="box" style="padding-top: -100px; margin-top: 50px;">
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    {% for category, message in messages %}
-    <div class="{{ category }}" style="margin-top: -50px;">
-        <div class="flash">
-            <p>{{ message }}</p>
-        </div>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
-    <div class="profile">
+<div class="box">
+    <div class="editRoles">
         <div class="row">
             <div class="username">
                 <div class="column">
-                    {{ profileInfo[1] }}
+                    Perfil
                 </div>
             </div>
             <div class="column">
-                <img style="width: 200px; margin-right: -100px;"
+                <img style="width: 200px; margin-left: 250px;"
                     src="{{ url_for('static', filename='images/SMlogo.png') }}">
             </div>
         </div>
+        <hr>
+        {% if role == 'Administrativo' %}
+        <div class="row">
+            <div class="column">
+                <h4>Cédula:</h4>
+                <p>{{ profileInfo[0] }}</p>
+            </div>
+            <div class="column">
+                <h4>Nombre:</h4>
+                <p>{{ profileInfo[1] }}</p>
+            </div>
+            <div class="column">
+                <h4>Fecha de nacimiento:</h4>
+                <p>{{profileInfo[2]}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h4>Sexo:</h4>
+                {% if (profileInfo[3] == 'M') %}
+                <p>Masculino</p>
+                {% else %}
+                <p>Femenino</p>
+                {% endif %}
+            </div>
+            <div class="column">
+                <h4>Teléfono:</h4>
+                <p>{{ profileInfo[4] }}</p>
+            </div>
+            <div class="column">
+                <h4>Rol:</h4>
+                {% if profileInfo[6] != None %}
+                <p>{{ profileInfo[6] }} </p>
+                {% else %}
+                <p>Sin rol asignado</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h4>Id Administrativo:</h4>
+                <p>{{ profileInfo[7] }}</p>
+            </div>
+            <div class="column">
+                <h4>Horario:</h4>
+                <p>{{ horario[0] }} - {{ horario[1] }}</p>
+            </div>
+            <div class="column">
+                <h4>Area:</h4>
+                <p>{{ profileInfo[10] }}</p>
+            </div>
+        </div>
+
+        {% elif role == 'Médico' %}
+        <div class="row">
+            <div class="column">
+                <h4>Cédula:</h4>
+                <p>{{ profileInfo[0] }}</p>
+            </div>
+            <div class="column">
+                <h4>Nombre:</h4>
+                <p>{{ profileInfo[1] }}</p>
+            </div>
+            <div class="column">
+                <h4>Fecha de nacimiento:</h4>
+                <p>{{profileInfo[2]}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h4>Sexo:</h4>
+                {% if (profileInfo[3] == 'M') %}
+                <p>Masculino</p>
+                {% else %}
+                <p>Femenino</p>
+                {% endif %}
+            </div>
+            <div class="column">
+                <h4>Teléfono:</h4>
+                <p>{{ profileInfo[4] }}</p>
+            </div>
+            <div class="column">
+                <h4>Rol:</h4>
+                {% if profileInfo[6] != None %}
+                <p>{{ profileInfo[6] }} </p>
+                {% else %}
+                <p>Sin rol asignado</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h4>Id Médico:</h4>
+                <p>{{ profileInfo[7] }}</p>
+            </div>
+            <div class="column">
+                <h4>Horario:</h4>
+                <p>{{ horario[0] }} - {{ horario[1] }}</p>
+            </div>
+            <div class="column">
+                <h4>Especialidad:</h4>
+                <p>{{ especialidad }}</p>
+            </div>
+        </div>
+
+        {% elif role == 'Enfermero' %}
+        <div class="row">
+            <div class="column">
+                <h4>Cédula:</h4>
+                <p>{{ profileInfo[0] }}</p>
+            </div>
+            <div class="column">
+                <h4>Nombre:</h4>
+                <p>{{ profileInfo[1] }}</p>
+            </div>
+            <div class="column">
+                <h4>Fecha de nacimiento:</h4>
+                <p>{{profileInfo[2]}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h4>Sexo:</h4>
+                {% if (profileInfo[3] == 'M') %}
+                <p>Masculino</p>
+                {% else %}
+                <p>Femenino</p>
+                {% endif %}
+            </div>
+            <div class="column">
+                <h4>Teléfono:</h4>
+                <p>{{ profileInfo[4] }}</p>
+            </div>
+            <div class="column">
+                <h4>Rol:</h4>
+                {% if profileInfo[6] != None %}
+                <p>{{ profileInfo[6] }} </p>
+                {% else %}
+                <p>Sin rol asignado</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h4>Id Enfermero:</h4>
+                <p>{{ profileInfo[7] }}</p>
+            </div>
+            <div class="column">
+                <h4>Horario:</h4>
+                <p>{{ horario[0] }} - {{ horario[1] }}</p>
+            </div>
+            <div class="column">
+                <h4>Ubicación:</h4>
+                <p>{{ ubicacion[0] }}, {{ ubicacion[1] }} {{ ubicacion[2] }}</p>
+            </div>
+        </div>
+
+        {% elif role == 'Ingeniero' %}
+        <div class="row">
+            <div class="column">
+                <h4>Cédula:</h4>
+                <p>{{ profileInfo[0] }}</p>
+            </div>
+            <div class="column">
+                <h4>Nombre:</h4>
+                <p>{{ profileInfo[1] }}</p>
+            </div>
+            <div class="column">
+                <h4>Fecha de nacimiento:</h4>
+                <p>{{profileInfo[2]}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h4>Sexo:</h4>
+                {% if (profileInfo[3] == 'M') %}
+                <p>Masculino</p>
+                {% else %}
+                <p>Femenino</p>
+                {% endif %}
+            </div>
+            <div class="column">
+                <h4>Teléfono:</h4>
+                <p>{{ profileInfo[4] }}</p>
+            </div>
+            <div class="column">
+                <h4>Rol:</h4>
+                {% if profileInfo[6] != None %}
+                <p>{{ profileInfo[6] }} </p>
+                {% else %}
+                <p>Sin rol asignado</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h4>Id Ingeniero:</h4>
+                <p>{{ profileInfo[7] }}</p>
+            </div>
+            <div class="column">
+                <h4>Horario:</h4>
+                <p>{{ horario[0] }} - {{ horario[1] }}</p>
+            </div>
+        </div>
+
+        {% elif role == 'Paciente' %}
+        <div class="row">
+            <div class="column">
+                <h4>Cédula:</h4>
+                <p>{{ profileInfo[0] }}</p>
+            </div>
+            <div class="column">
+                <h4>Nombre:</h4>
+                <p>{{ profileInfo[1] }}</p>
+            </div>
+            <div class="column">
+                <h4>Fecha de nacimiento:</h4>
+                <p>{{profileInfo[2]}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h4>Sexo:</h4>
+                {% if (profileInfo[3] == 'M') %}
+                <p>Masculino</p>
+                {% else %}
+                <p>Femenino</p>
+                {% endif %}
+            </div>
+            <div class="column">
+                <h4>Teléfono:</h4>
+                <p>{{ profileInfo[4] }}</p>
+            </div>
+            <div class="column">
+                <h4>Rol:</h4>
+                {% if profileInfo[6] != None %}
+                <p>{{ profileInfo[6] }} </p>
+                {% else %}
+                <p>Sin rol asignado</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h4>Id Paciente:</h4>
+                <p>{{ profileInfo[7] }}</p>
+            </div>
+            <div class="column">
+                <h4>EPS:</h4>
+                <p>{{ eps }}</p>
+            </div>
+            <div class="column">
+                <h4>Peso:</h4>
+                <p>{{ profileInfo[12] }}</p>
+            </div>
+            <div class="column">
+                <h4>Ubicación:</h4>
+                <p>{{ ubicacion[0] }}, {{ ubicacion[1] }} {{ ubicacion[2] }}</p>
+            </div>
+        </div>
+        {% elif role == 'Servicios' %}
+        <div class="row">
+            <div class="column">
+                <h4>Cédula:</h4>
+                <p>{{ profileInfo[0] }}</p>
+            </div>
+            <div class="column">
+                <h4>Nombre:</h4>
+                <p>{{ profileInfo[1] }}</p>
+            </div>
+            <div class="column">
+                <h4>Fecha de nacimiento:</h4>
+                <p>{{profileInfo[2]}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h4>Sexo:</h4>
+                {% if (profileInfo[3] == 'M') %}
+                <p>Masculino</p>
+                {% else %}
+                <p>Femenino</p>
+                {% endif %}
+            </div>
+            <div class="column">
+                <h4>Teléfono:</h4>
+                <p>{{ profileInfo[4] }}</p>
+            </div>
+            <div class="column">
+                <h4>Rol:</h4>
+                {% if profileInfo[6] != None %}
+                <p>{{ profileInfo[6] }} </p>
+                {% else %}
+                <p>Sin rol asignado</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h4>Id Servicios Generales:</h4>
+                <p>{{ profileInfo[7] }}</p>
+            </div>
+            <div class="column">
+                <h4>Horario:</h4>
+                <p>{{ horario[0] }} - {{ horario[1] }}</p>
+            </div>
+        </div>
+        {% else %}
         <div>
             <hr>
             <h4>Cédula:</h4>
@@ -47,8 +344,7 @@
             <p>Sin rol asignado</p>
             {% endif %}
         </div>
-
-        <a href="/profile/edit"><button type="button" class="btn">Editar perfil</button></a>
+        {% endif %}
     </div>
 </div>
 

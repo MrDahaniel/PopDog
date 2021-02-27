@@ -18,7 +18,7 @@ def searchRedirector():
         perfiles = cur.fetchall()
         return render_template('search.html',role=role,perfiles=perfiles)
 
-    return('owo')
+    return redirect(url_for('main.index'))
 
 @search.route('/search', methods=['POST'])
 def searchRedirectorPost():
@@ -39,6 +39,7 @@ def searchResult():
     horario = None
     especialidad = None
     ubicacion = None
+    eps = None
 
     #Pain, time to make a if giberish 
     if role == 'Administrativo':
@@ -58,6 +59,10 @@ def searchResult():
     elif role == 'Paciente':
         cur.execute('call getPatientProfile(%s)', [cedula])
         profileInfo = cur.fetchone()
+        cur.execute('call getEPS(%s)', [profileInfo[10]])
+        eps = cur.fetchone()[0]
+        cur.execute('call getLocation(%s)', [profileInfo[9]])
+        ubicacion = cur.fetchone()
         
     elif role == 'Enfermero':
         cur.execute('call getNurseProfile(%s)', [cedula])
@@ -84,4 +89,4 @@ def searchResult():
         cur.execute('call getProfile(%s)', [cedula])
         profileInfo = cur.fetchone()
 
-    return render_template('searchResult.html', profileInfo=profileInfo, horario=horario, role=role, especialidad=especialidad, ubicacion=ubicacion)
+    return render_template('searchResult.html', profileInfo=profileInfo, horario=horario, role=role, especialidad=especialidad, ubicacion=ubicacion, eps=eps)

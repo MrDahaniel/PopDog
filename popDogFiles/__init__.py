@@ -36,4 +36,10 @@ def createApp():
     from .search import search as searchBlueprint
     app.register_blueprint(searchBlueprint)
 
+    from .location import location as locationBlueprint
+    app.register_blueprint(locationBlueprint)
+
+    from .inventory import inventory as inventoryBlueprint
+    app.register_blueprint(inventoryBlueprint)
+
     return app

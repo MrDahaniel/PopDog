@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+<div class="{{ category }}" style="margin-top: 50px; margin-bottom: 15px;">
+    <div class="flash">
+        <p>{{ message }}</p>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="box">
+    <div class="editRoles">
+        <div class="row">
+            <div class="username">
+                <div class="column">
+                    Inventario
+                </div>
+            </div>
+            <div class="column">
+                <img style="width: 200px; margin-right: 250px;"
+                    src="{{ url_for('static', filename='images/SMlogo.png') }}">
+            </div>
+        </div>
+        <hr>
+        <form action="{{ url_for('inventory.inv') }}" method="POST">
+            <div class="input-container" style="margin-top: 50px;">
+                <h4>Crear orden de inventario</h4>
+                <div class="row">
+                    <div class="column">
+                        <select name="item">
+                            {% for item in items %}
+                                <option value="{{item.0}}">{{item.2}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="column" style="flex: none;">
+                        <div class="input-container">
+                            <input type="number" name="cantidad" min="1" required>
+                            <label>Cantidad</label>
+                        </div>
+                    </div>
+                    <div class="column" style="flex: none;">
+                        <button type="submit" class="btn" style="margin-top: auto;">Crear</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <hr>
+        <h1>Inventario</h1>
+        <table class="basicTable">
+            <thead>
+                <tr>
+                    <th> Id Item </th>
+                    <th> Nombre Item </th>
+                    <th> Cantidad </th>
+                </tr>
+            </thead>
+            {% for item in items %}
+            <tr>
+                <td> {{item.0}} </td>
+                <td> {{item.1}} </td>
+                <td> {{item.3}} </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <hr>
+        <h1>Ordenes</h1>
+        <table class="basicTable">
+            <thead>
+                <th>Número orden</th>
+                <th>Id Item</th>
+                <th>Nombre Item</th>
+                <th>Cantidad</th>
+                <th>Creado por</th>
+                <th></th>
+            </thead>
+            {% for orden in ordenes %}
+                <tr>
+                    <td> {{ orden.0 }} </td>
+                    <td> {{ orden.1 }} </td>
+                    <td> {{ orden.2 }} </td>
+                    <td> {{ orden.3 }} </td>
+                    <td> {{ orden.4 }} </td>
+                    <td> <a href=" {{ url_for('inventory.recieved',orden=orden.0,item=orden.1,cantidad=orden.3) }}" style="color: whitesmoke;"> Reportar recibido</a> </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}

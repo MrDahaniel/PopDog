@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+<div class="{{ category }}" style="margin-top: 50px;">
+    <div class="flash">
+        <p>{{ message }}</p>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="box">
+    <div class="editRoles">
+        <div class="row">
+            <div class="username">
+                <div class="column">
+                    Ubicaciones
+                </div>
+            </div>
+            <div class="column">
+                <img style="width: 200px; margin-right: 250px;"
+                    src="{{ url_for('static', filename='images/SMlogo.png') }}">
+            </div>
+        </div>
+        <hr>
+        <form action="{{ url_for('location.searchLocation',sectore=sectors) }}" method="POST">
+            <div class="input-container" style="margin-top: 50px;">
+                <div class="row">
+                    <div class="column">
+                        <input type="text" name="cedula" style="margin-top: auto;" value="{{ search }}" required>
+                        <label>Buscar personal por cédula y seleccionar sector</label>
+                    </div>
+                    <div class="column" style="flex: none;">
+                        <button type="submit" class="btn" style="margin-top: auto;">Search</button>
+                    </div>
+                    <div class="column" style="flex: none;">
+                        <a href="{{ url_for('location.searchLocation') }}"><button type="button" class="btn"
+                                style="margin-top: auto;">Reset</button></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <select name="sector">
+                            {% for sector in sectors %}
+                            <option value="{{ sector.0 }}">{{ sector.1 }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <hr>
+        {% if showProfile %}
+        <div class="row">
+            <div class="column">
+                <h4>Cédula:</h4>
+                <p>{{ profileInfo[0] }}</p>
+            </div>
+            <div class="column">
+                <h4>Nombre:</h4>
+                <p>{{ profileInfo[1] }}</p>
+            </div>
+            <div class="column">
+                <h4>Rol:</h4>
+                {% if profileInfo[5] != None %}
+                <p>{{ profileInfo[5] }} </p>
+                {% else %}
+                <p>Sin rol asignado</p>
+                {% endif %}
+            </div>
+        </div>
+        <form action="{{ url_for('location.ubicator', cedula=profileInfo[0], role=profileInfo[5]) }}" method="POST">
+            <div class="row">
+                <div class='column'>
+                    <label> Ubicación a asignar </label>
+                    <select name="ubicacion">
+                        {% for ubicacion in ubicaciones %}
+                        <option value="{{ ubicacion.0 }}">{{ ubicacion.1}} {{ ubicacion.2 }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn" style="margin-top: auto;">Search</button>
+        </form>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

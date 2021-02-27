@@ -26,17 +26,66 @@ def index():
 
 @main.route('/profile')
 def profile():
-    #If not logged in, redirect to login page.
-    if not session:
-        return redirect(url_for('auth.login'))
-
-    #First thing to do, get a cursor and call the user info from perfiles
+    cedula = session['id']
+    
     cur = db.connection.cursor()
-    cur.execute('call getProfile(%s)', [session['id']])
-    profileInfo = cur.fetchone()
-    cur.close()
+    cur.execute('call getRole(%s)',[cedula])
+    role = cur.fetchone()[0]
 
-    return render_template('profile.html', profileInfo=profileInfo)
+    horario = None
+    especialidad = None
+    ubicacion = None
+    eps = None
+
+    #Pain, time to make a if giberish 
+    if role == 'Administrativo':
+        cur.execute('call getAdminProfile(%s)', [cedula])
+        profileInfo = cur.fetchone()
+        cur.execute('call getSingleSchedule(%s)', [profileInfo[9]])
+        horario = cur.fetchone()
+        
+    elif role == 'Médico':
+        cur.execute('call getMedicProfile(%s)', [cedula])
+        profileInfo = cur.fetchone()
+        cur.execute('call getSingleSchedule(%s)', [profileInfo[10]])
+        horario = cur.fetchone()
+        cur.execute('call getSingleEspecial(%s)', [profileInfo[9]])
+        especialidad = cur.fetchone()[0]
+        
+    elif role == 'Paciente':
+        cur.execute('call getPatientProfile(%s)', [cedula])
+        profileInfo = cur.fetchone()
+        cur.execute('call getEPS(%s)', [profileInfo[10]])
+        eps = cur.fetchone()[0]
+        cur.execute('call getLocation(%s)', [profileInfo[9]])
+        ubicacion = cur.fetchone()
+        
+    elif role == 'Enfermero':
+        cur.execute('call getNurseProfile(%s)', [cedula])
+        profileInfo = cur.fetchone()
+        cur.execute('call getLocation(%s)', [profileInfo[10]])
+        ubicacion = cur.fetchone()
+        print(ubicacion)
+        cur.execute('call getSingleSchedule(%s)', [profileInfo[10]])
+        horario = cur.fetchone()
+        
+    elif role == 'Ingeniero':
+        cur.execute('call getEngieProfile(%s)', [cedula])
+        profileInfo = cur.fetchone()
+        cur.execute('call getSingleSchedule(%s)', [profileInfo[9]])
+        horario = cur.fetchone()
+        
+    elif role == 'Servicios':
+        cur.execute('call getSerGenProfile(%s)', [cedula])
+        profileInfo = cur.fetchone()
+        cur.execute('call getSingleSchedule(%s)', [profileInfo[9]])
+        horario = cur.fetchone()
+
+    else:
+        cur.execute('call getProfile(%s)', [cedula])
+        profileInfo = cur.fetchone()
+
+    return render_template('profile.html', profileInfo=profileInfo, horario=horario, role=role, especialidad=especialidad, ubicacion=ubicacion, eps=eps)
 
 @main.route('/tester')
 def asd():

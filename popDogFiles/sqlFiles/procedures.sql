@@ -32,6 +32,20 @@ end $$
 
 delimiter ;
 
+-- Trae el hashpass para hacer comprobaciones divertidas
+
+delimiter $$ 
+ 
+create procedure getHashPass(
+    in ced int
+)
+begin 
+    select passhash from perfiles where cedula = ced;
+end $$
+
+delimiter ;
+
+
 -- Actualizar todos los valores del perfil en la base de datos
 
 delimiter $$
@@ -54,7 +68,7 @@ delimiter ;
 
 delimiter $$
 
-create procedure getRole(
+create procedure (
     in ced int
 )
 begin
@@ -287,6 +301,60 @@ begin
     inner join sector as s on u.idSector = s.idSector
     inner join tipoUbicacion as tu on u.idTipUbi = tu.idTipUbi 
     where u.idUbicacion = idUbi;
+end $$
+
+delimiter ;
+
+-- Trae el nombre de la eps a patir de un id
+
+delimiter $$
+
+create procedure getEPS(
+    in idE int
+)
+begin
+    select nombreEPS from eps where idEPS = idE;
+end $$
+
+delimiter ;
+
+-- Trae todos los sectores 
+
+delimiter $$
+
+create procedure getSectors()
+begin
+    select * from sector;
+end $$
+
+delimiter ;
+
+-- 
+
+delimiter $$
+
+create procedure getLocationSector(
+    in idSector int
+)
+begin
+    select u.idUbicacion, tu.nombreTipUbi, u.nombreUbi from ubicacion as u 
+    inner join sector as s on u.idSector = s.idSector
+    inner join tipoUbicacion as tu on u.idTipUbi = tu.idTipUbi 
+    where u.idSector = idSector;
+end $$
+
+delimiter ;
+
+-- Trae todas las ordenes pendientes
+
+delimiter $$
+
+create procedure getOrders()
+begin 
+    select p.idPedido, i.idItem, i.nombre, p.cantidad, pe.nombre from pedidos as p 
+    inner join administrativos as a on a.idAdministrativo = p.idAdministrativo
+    inner join perfiles as pe on a.cedula = pe.cedula
+    inner join item as i on i.idItem = p.idItem;
 end $$
 
 delimiter ;

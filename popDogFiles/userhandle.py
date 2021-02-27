@@ -29,11 +29,11 @@ def editProfilePost():
     password = request.form['password']
     
     cur = db.connection.cursor()
-    cur.execute('call getProfile(%s)', [session['id']])
+    cur.execute('call getHashPass(%s)', [session['id']])
 
-    profileInfo = cur.fetchone()
+    profileInfo = cur.fetchone()[0]
 
-    if check_password_hash(profileInfo[5],password): #If true, means passwords good. update fields in database
+    if check_password_hash(profileInfo,password): #If true, means passwords good. update fields in database
         cur.execute('call updateProfile(%s,%s,%s,%s,%s)', [session['id'], name, fecha, sexo, phone])
         db.connection.commit()
         flash('Perfil ha sido actualizado correctamente', 'ok')

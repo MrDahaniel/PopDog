@@ -126,10 +126,8 @@ h3 {
 }
 
 .box {
-    position: absolute;
-    left: 50%;
+    position: relative;
     top: 50%;
-    transform: translate(-50%, -50%);
     background-color: #1c1c1c;
     border-radius: 3px;
     padding: 70px 100px;
