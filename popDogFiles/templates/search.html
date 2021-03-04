@@ -4,11 +4,14 @@
 
 <div class="box">
     <div class="editRoles">
-        {% if role == 'Administrativo' %}
         <div class="row">
             <div class="username">
                 <div class="column">
+                    {% if role == 'Administrativo' %}
                     Buscar personas
+                    {% elif rol == 'Médico' %}
+                    Buscar pacientes
+                    {% endif %}
                 </div>
             </div>
             <div class="column">
@@ -55,9 +58,6 @@
             </tr>
             {% endfor %}
         </table>
-        {% elif rol == 'Médico' %}
-
-        {% endif %}
     </div>
 </div>
 

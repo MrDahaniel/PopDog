@@ -18,15 +18,30 @@ def searchRedirector():
         perfiles = cur.fetchall()
         return render_template('search.html',role=role,perfiles=perfiles)
 
+    elif role in ['Médico', 'Enfermero']:
+        cur.execute('select cedula, nombre, telefono, role from perfiles where role = "Paciente" ')
+        perfiles = cur.fetchall()
+        return render_template('search.html',role=role,perfiles=perfiles)
+
     return redirect(url_for('main.index'))
 
 @search.route('/search', methods=['POST'])
 def searchRedirectorPost():
     cedula = request.form['cedula']
+    roleless = []
 
     cur = db.connection.cursor()
-    cur.execute('call getRolelessSearch(%s)', [cedula])
-    roleless = cur.fetchall()
+    cur.execute('call getRole(%s)', [session['id']])
+    role = cur.fetchone()[0]
+
+    if role == 'Administrativo':
+        cur.execute('call getRolelessSearch(%s)', [cedula])
+        roleless = cur.fetchall()
+
+    elif role in ['Médico', 'Enfermero']:
+        cur.execute('select cedula, nombre, telefono, role from perfiles where role = "Paciente" and cedula = %s', [cedula])
+        roleless = cur.fetchall()
+    
     cur.close()
 
     return render_template('search.html',perfiles=roleless, search=cedula,role=request.args.get('role'))

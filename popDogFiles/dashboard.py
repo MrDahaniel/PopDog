@@ -40,18 +40,31 @@ def admin():
 
     #First thing to do, get a cursor and call the user info from perfiles
     cur = db.connection.cursor()
-    cur.execute('call getProfile(%s)', [session['id']])
-    profileInfo = cur.fetchone()
+    cur.execute('call getRole(%s)', [session['id']])
+    role = cur.fetchone()[0]
     cur.close()
 
-    if profileInfo[5] != 'Administrativo':
+    if role != 'Administrativo':
         flash('No se tienen los permisos suficientes para acceder a esta página', 'alert')
         return redirect(url_for('main.index'))
 
-    return render_template('adminDashboard.html', profileInfo=profileInfo)
+    return render_template('dashboard.html', role=role)
 
-#@dashboard.route()
-#def medic():
+@dashboard.route('/dashboard/medic')
+def medic():
+    if not session:
+        return redirect(url_for('auth.login'))
+
+    cur = db.connection.cursor()
+    cur.execute('call getRole(%s)', [session['id']])
+    role = cur.fetchone()[0]
+    cur.close()
+    
+    if role != 'Médico':
+        flash('No se tienen los permisos suficientes para acceder a esta página', 'alert')
+        return redirect(url_for('main.index'))
+    
+    return render_template('dashboard.html', role=role)
 
 #@dashboard.route() 
 #def engie():

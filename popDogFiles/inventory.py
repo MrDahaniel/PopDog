@@ -14,7 +14,7 @@ def inv():
     cur.execute('call getRole(%s)', [session['id']])
     role = cur.fetchone()[0]
 
-    if role != "Administrativo":
+    if not role in ["Administrativo", 'Médico']:
         flash('No se tienen los permisos suficientes para acceder a esta página', 'alert')
         return redirect(url_for('main.index'))
 
@@ -26,7 +26,7 @@ def inv():
 
     cur.close()
 
-    return render_template('inventario.html', items=items, ordenes=ordenes)
+    return render_template('inventario.html', items=items, ordenes=ordenes, role=role)
 
 @inventory.route('/inventory', methods=['POST'])
 def invPost():

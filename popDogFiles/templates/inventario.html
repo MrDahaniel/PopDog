@@ -28,6 +28,7 @@
             </div>
         </div>
         <hr>
+        {% if role == 'Administrativo' %}
         <form action="{{ url_for('inventory.inv') }}" method="POST">
             <div class="input-container" style="margin-top: 50px;">
                 <h4>Crear orden de inventario</h4>
@@ -35,7 +36,7 @@
                     <div class="column">
                         <select name="item">
                             {% for item in items %}
-                                <option value="{{item.0}}">{{item.2}}</option>
+                            <option value="{{item.0}}">{{item.2}}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -51,6 +52,7 @@
                 </div>
             </div>
         </form>
+        {% endif %}
         <form action="{{ url_for('inventory.invRem') }}" method="POST">
             <div class="input-container" style="margin-top: 50px;">
                 <h4>Sacar de inventario</h4>
@@ -58,7 +60,7 @@
                     <div class="column">
                         <select name="item">
                             {% for item in items %}
-                                <option value="{{item.0}}">{{item.2}}</option>
+                            <option value="{{item.0}}">{{item.2}}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -93,6 +95,7 @@
             {% endfor %}
         </table>
         <hr>
+        {% if role == 'Administrativo' %}
         <h1>Ordenes</h1>
         <table class="basicTable">
             <thead>
@@ -104,16 +107,18 @@
                 <th></th>
             </thead>
             {% for orden in ordenes %}
-                <tr>
-                    <td> {{ orden.0 }} </td>
-                    <td> {{ orden.1 }} </td>
-                    <td> {{ orden.2 }} </td>
-                    <td> {{ orden.3 }} </td>
-                    <td> {{ orden.4 }} </td>
-                    <td> <a href=" {{ url_for('inventory.recieved',orden=orden.0,item=orden.1,cantidad=orden.3) }}" style="color: whitesmoke;"> Reportar recibido</a> </td>
-                </tr>
+            <tr>
+                <td> {{ orden.0 }} </td>
+                <td> {{ orden.1 }} </td>
+                <td> {{ orden.2 }} </td>
+                <td> {{ orden.3 }} </td>
+                <td> {{ orden.4 }} </td>
+                <td> <a href=" {{ url_for('inventory.recieved',orden=orden.0,item=orden.1,cantidad=orden.3) }}"
+                        style="color: whitesmoke;"> Reportar recibido</a> </td>
+            </tr>
             {% endfor %}
         </table>
+        {% endif %}
     </div>
 </div>
 

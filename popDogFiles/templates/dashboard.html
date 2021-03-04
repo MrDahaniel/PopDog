@@ -28,6 +28,7 @@
             </div>
         </div>
         <hr>
+        {% if role == 'Administrativo' %}
         <div class="row">
             <div class="column">
                 <a href="{{ url_for('roles.editRoles') }}">
@@ -74,6 +75,40 @@
                 </a>
             </div>
         </div>
+        {% elif role == 'Médico' %}
+        <div class="row">
+            <div class="column" style="flex: 50%;">
+                <a href="{{ url_for('search.searchRedirector') }}">
+                    <div class="block">
+                        <strong>Buscar pacientes</strong>
+                    </div>
+                </a>
+            </div>
+            <div class="column" style="flex: 50%;">
+                <a href="{{ url_for('inventory.inv') }}">
+                    <div class="block">
+                        <strong>Revisar inventario</strong>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column" style="flex: 50%;">
+                <a href="{{ url_for('roles.editRoles') }}">
+                    <div class="block">
+                        <strong>Agregar y Modificar Roles</strong>
+                    </div>
+                </a>
+            </div>
+            <div class="column" style="flex: 50%;">
+                <a href="{{ url_for('roles.editRoles') }}">
+                    <div class="block">
+                        <strong>Agregar y Modificar Roles</strong>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endif %}
     </div>
 </div>
 
