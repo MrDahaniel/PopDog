@@ -358,3 +358,51 @@ begin
 end $$
 
 delimiter ;
+
+--Trae el rol del usuario en sessión actual
+
+delimiter $$
+
+create procedure getRole(
+    in ced int
+)  
+begin
+    select role from perfiles where cedula = ced;
+end
+
+delimiter ;
+
+-- Trae todas las ordenes de mantenimiento
+
+delimiter $$
+
+create procedure getMOByStatus(
+    in state boolean
+)
+begin
+    select om.idOrdenMantenimiento, om.idEquipo, te.nombreTipEqu, tu.nombreTipUbi, u.nombreUbi, p.nombre from ordenMantenimiento as om
+    inner join equipo as e on e.idEquipo = om.idEquipo
+    inner join tipoEquipo as te on te.idTipEqu = e.idTipEqu
+    inner join ubicacion as u on u.idUbicacion = e.idUbicacion
+    inner join tipoUbicacion as tu on tu.idTipUbi = u.idTipUbi
+    inner join ingenieros as i on i.idIngeniero = om.idIngeniero
+    inner join perfiles as p on p.cedula = i.cedula
+    where ordenCompletada = state;
+end $$
+
+delimiter ;
+
+-- Trae toda la información de los equipos
+
+delimiter $$
+
+create procedure getAllEquipment(
+)
+begin
+    select te.nombreTipEqu, e.idEquipo, tu.nombreTipUbi, u.nombreUbi from equipo as e 
+    inner join tipoEquipo as te on te.idTipEqu = e.idTipEqu 
+    inner join ubicacion as u on u.idUbicacion = e.idUbicacion
+    inner join tipoUbicacion as tu on tu.idTipUbi = u.idTipUbi;
+end $$
+
+delimiter ;

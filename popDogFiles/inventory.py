@@ -45,6 +45,8 @@ def invPost():
 
     return redirect(url_for('inventory.inv'))
 
+    
+
 @inventory.route('/inventory/recieved')
 def recieved():
     if not session:
@@ -68,6 +70,30 @@ def recieved():
     cur.execute('update item set cantidad = cantidad + %s where idItem = %s', [cantidad,item])
     db.connection.commit()
 
+    cur.close()
+
     flash('Orden completada', 'ok')
 
+    return redirect(url_for('inventory.inv'))
+
+@inventory.route('/inventory/remove', methods=['POST'])
+def invRem():
+    idItem = request.form['item']
+    cantidadARetirar = request.form['cantidad']
+
+    cur = db.connection.cursor()
+
+    cur.execute('select * from item where idItem = %s',  [idItem])
+    cantidadInventario = cur.fetchone()[3]
+
+    if int(cantidadInventario) < int(cantidadARetirar):
+        flash('La cantidad solicitada es mayor que la cantidad en stock','alert')
+
+    else:
+        cur.execute('update item set cantidad = cantidad - %s where idItem = %s', [cantidadARetirar,idItem])
+        db.connection.commit()
+        flash('Cantidad retirada de inventario satisfactoriamente','ok')
+
+    cur.close()
+    
     return redirect(url_for('inventory.inv'))

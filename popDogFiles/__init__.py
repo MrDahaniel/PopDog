@@ -42,4 +42,7 @@ def createApp():
     from .inventory import inventory as inventoryBlueprint
     app.register_blueprint(inventoryBlueprint)
 
+    from .maintenance import maintenance as maintenanceBlueprint
+    app.register_blueprint(maintenanceBlueprint)
+
     return app

@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+<div class="{{ category }}" style="margin-top: 50px; margin-bottom: 15px;">
+    <div class="flash">
+        <p>{{ message }}</p>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="box">
+    <div class="editRoles">
+        <div class="row">
+            <div class="username">
+                <div class="column">
+                    mantenimiento
+                </div>
+            </div>
+            <div class="column">
+                <img style="width: 200px; margin-right: 250px;"
+                    src="{{ url_for('static', filename='images/SMlogo.png') }}">
+            </div>
+        </div>
+        <hr>
+        <form action="{{ url_for('maintenance.maintenanceCreate') }}" method="POST">
+            <div class="input-container" style="margin-top: 50px;">
+                <h4>Crear orden de mantenimiento</h4>
+                <div class="row">
+                    <div class="column" style="flex: 50%;">
+                        <select name="equipo">
+                            {% for equipo in equipos %}
+                                <option value="{{equipo.1}}">{{equipo.0}} {{equipo.1}} ({{equipo.2}} {{equipo.3}})</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="column" style="flex: 50%;">
+                        <select name="ingeniero">
+                            {% for ingeniero in ingenieros %}
+                                <option value="{{ingeniero.1}}">{{ingeniero.0}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="column" style="flex: none;">
+                        <button type="submit" class="btn" style="margin-top: auto;">Crear</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <hr>
+        <h1>Ordenes de mantenimiento pendientes</h1>
+        <table class="basicTable">
+            <thead>
+                <tr>
+                    <th> Id Orden </th>
+                    <th> Id equipo </th>
+                    <th> Tipo equipo </th>
+                    <th> Ubicación </th>
+                    <th> Ingeniero Asignado </th>
+                    <th></th>
+                </tr>
+            </thead>
+            {% for pendiente in pendientes %}
+            <tr>
+                <td> {{pendiente.0}} </td>
+                <td> {{pendiente.1}} </td>
+                <td> {{pendiente.2}} </td>
+                <td> {{pendiente.3}} {{pendiente.4}} </td>
+                <td> {{pendiente.5}} </td>
+                <td> <a href=" {{ url_for('maintenance.maintenanceComplete', orden = pendiente.0)}}" style="color: whitesmoke;"> Reportar completado </a> </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <hr>
+        <h1>Ordenes de mantenimiento completadas</h1>
+        <table class="basicTable">
+            <thead>
+                <th> Id Orden </th>
+                <th> Id equipo </th>
+                <th> Tipo equipo </th>
+                <th> Ubicación </th>
+                <th> Ingeniero Asignado </th>
+            </thead>
+            {% for completado in completados %}
+                <tr>
+                    <td> {{completado.0}} </td>
+                    <td> {{completado.1}} </td>
+                    <td> {{completado.2}} </td>
+                    <td> {{completado.3}} {{completado.4}} </td>
+                    <td> {{completado.5}} </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}

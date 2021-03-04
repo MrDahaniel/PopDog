@@ -51,6 +51,29 @@
                 </div>
             </div>
         </form>
+        <form action="{{ url_for('inventory.invRem') }}" method="POST">
+            <div class="input-container" style="margin-top: 50px;">
+                <h4>Sacar de inventario</h4>
+                <div class="row">
+                    <div class="column">
+                        <select name="item">
+                            {% for item in items %}
+                                <option value="{{item.0}}">{{item.2}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="column" style="flex: none;">
+                        <div class="input-container">
+                            <input type="number" name="cantidad" min="1" required>
+                            <label>Cantidad</label>
+                        </div>
+                    </div>
+                    <div class="column" style="flex: none;">
+                        <button type="submit" class="btn" style="margin-top: auto;">Retirar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
         <hr>
         <h1>Inventario</h1>
         <table class="basicTable">
