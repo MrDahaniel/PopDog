@@ -406,3 +406,80 @@ begin
 end $$
 
 delimiter ;
+
+-- Trae todos los pacientes con un ingreso activo
+
+delimiter $$
+
+create procedure getInPatients(
+)
+begin
+    select i.idIngreso, i.idPaciente, pe.nombre, ep.nombreEPS, tu.nombreTipUbi, u.nombreUbi, me.nombreMedio 
+    from ingresos as i
+    inner join pacientes as p on p.idPaciente = i.idPaciente
+    inner join perfiles as pe on pe.cedula = p.cedula
+    inner join medioEntrada as me on me.idMedio = i.idMedio
+    inner join eps as ep on ep.idEPS = p.idEPS
+    inner join ubicacion as u on u.idUbicacion = p.idUbicacion
+    inner join tipoUbicacion as tu on tu.idTipUbi = u.idTipUbi
+    where i.estado = false;
+end $$
+
+delimiter ;
+
+-- Trae todos las salidas de los pacientes
+
+delimiter $$
+
+create procedure getOutPatients(
+)
+begin
+    select s.idSalidas, s.idPaciente, pe.nombre, s.fecha, s.hora, m.idMedico, pem.nombre
+    from salidas as s
+    inner join pacientes as p on p.idPaciente = s.idPaciente
+    inner join perfiles as pe on pe.cedula = p.cedula
+    inner join medico as m on m.idMedico = s.idMedicoAut
+    inner join perfiles as peM on pem.cedula = m.cedula;
+end $$
+
+delimiter ;
+ 
+ -- Trae todos los pacientes con un ingreso activo (With search!)
+
+delimiter $$
+
+create procedure getInPatientsSearch(
+    in ced int
+)
+begin
+    select i.idIngreso, i.idPaciente, pe.nombre, ep.nombreEPS, tu.nombreTipUbi, u.nombreUbi, me.nombreMedio 
+    from ingresos as i
+    inner join pacientes as p on p.idPaciente = i.idPaciente
+    inner join perfiles as pe on pe.cedula = p.cedula
+    inner join medioEntrada as me on me.idMedio = i.idMedio
+    inner join eps as ep on ep.idEPS = p.idEPS
+    inner join ubicacion as u on u.idUbicacion = p.idUbicacion
+    inner join tipoUbicacion as tu on tu.idTipUbi = u.idTipUbi
+    where pe.cedula = ced;
+end $$
+
+delimiter ;
+
+-- Trae todos las salidas de los pacientes (With search!)
+
+delimiter $$
+
+create procedure getOutPatientsSearch(
+    in ced int
+)
+begin
+    select s.idSalidas, s.idPaciente, pe.nombre, s.fecha, s.hora, m.idMedico, pem.nombre
+    from salidas as s
+    inner join pacientes as p on p.idPaciente = s.idPaciente
+    inner join perfiles as pe on pe.cedula = p.cedula
+    inner join medico as m on m.idMedico = s.idMedicoAut
+    inner join perfiles as peM on pem.cedula = m.cedula
+    where pe.cedula = ced;
+end $$
+
+delimiter ;

@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+<div class="{{ category }}" style="margin-top: 50px; margin-bottom: 15px;">
+    <div class="flash">
+        <p>{{ message }}</p>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="box">
+    <div class="editRoles">
+        <div class="row">
+            <div class="username">
+                <div class="column">
+                    Pacientes
+                </div>
+            </div>
+            <div class="column">
+                <img style="width: 200px; margin-right: 250px;"
+                    src="{{ url_for('static', filename='images/SMlogo.png') }}">
+            </div>
+        </div>
+        <hr>
+        <form action="{{ url_for('patients.patientHandleIn') }}" method="POST">
+            <div class="input-container" style="margin-top: 50px;">
+                <h4>Ingresar paciente</h4>
+                <div class="row">
+                    <div class="column" style="flex: 50%;">
+                        <div class="input-container">
+                            <input type="number" name="cedula" min="1" required>
+                            <label>Cédula</label>
+                        </div>
+                    </div>
+                    <div class="column"  style="flex: 50%;">
+                        <select name="medio">
+                            {% for medioEntrada in mediosEntrada %}
+                            <option value="{{medioEntrada.0}}">{{medioEntrada.1}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="column" style="flex: none;">
+                        <button type="submit" class="btn" style="margin-top: auto;">Crear</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <hr>
+        <h1>Pacientes ingresados</h1>
+        <table class="basicTable">
+            <thead>
+                <tr>
+                    <th> Id Ingreso </th>
+                    <th> Id Paciente </th>
+                    <th> Nombre </th>
+                    <th> EPS </th>
+                    <th> Ubicación </th>
+                    <th> Medio Entrada </th>
+                    {% if role == 'Médico' %}
+                            <th></th>
+                    {% endif %}
+                </tr>
+            </thead>
+            {% for ingresado in ingresados %}
+            <tr>
+                <td> {{ingresado.0}} </td>
+                <td> {{ingresado.1}} </td>
+                <td> {{ingresado.2}} </td>
+                <td> {{ingresado.3}} </td>
+                <td> {{ingresado.4}} {{ingresado.5}} </td>
+                <td> {{ingresado.6}} </td>
+                {% if role == 'Médico' %}
+                <td> <a href=" {{ url_for('patients.patientHandleOut', ingreso=ingresado.0, patient = ingresado.1) }}" style="color: whitesmoke;"> Dar salida </a> </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+        <hr>
+        <h1>Salidas pacientes</h1>
+        <table class="basicTable">
+            <thead>
+                <th> Id Salida </th>
+                <th> Id Paciente </th>
+                <th> Nombre </th>
+                <th> Fecha y hora autorización </th>
+                <th> Id Médico </th>
+                <th> Nombre Médico </th>
+            </thead>
+            {% for salida in salidos %}
+            <tr>
+                <td> {{salida.0}} </td>
+                <td> {{salida.1}} </td>
+                <td> {{salida.2}} </td>
+                <td> {{salida.3}} {{salida.4}} </td>
+                <td> {{salida.5}} </td>
+                <td> {{salida.6}} </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}

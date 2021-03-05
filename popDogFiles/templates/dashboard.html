@@ -68,11 +68,11 @@
                 </a>
             </div>
             <div class="column">
-                <a href="https://giphy.com/gifs/taco-tacos-tuesday-26uf4WftccToOFm8w">
+                <a href="{{ url_for('patients.patientsHandle') }}">
                     <div class="block">
-                        <strong>Taco</strong>
+                        <strong>Ver estado de pacientes</strong>
                     </div>
-                </a>
+                </a>  
             </div>
         </div>
         {% elif role == 'Médico' %}
@@ -94,16 +94,9 @@
         </div>
         <div class="row">
             <div class="column" style="flex: 50%;">
-                <a href="{{ url_for('roles.editRoles') }}">
+                <a href="{{ url_for('patients.patientsHandle') }}">
                     <div class="block">
-                        <strong>Agregar y Modificar Roles</strong>
-                    </div>
-                </a>
-            </div>
-            <div class="column" style="flex: 50%;">
-                <a href="{{ url_for('roles.editRoles') }}">
-                    <div class="block">
-                        <strong>Agregar y Modificar Roles</strong>
+                        <strong>Ingresar y Autorizar salida de pacientes</strong>
                     </div>
                 </a>
             </div>
