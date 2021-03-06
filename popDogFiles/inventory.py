@@ -14,7 +14,7 @@ def inv():
     cur.execute('call getRole(%s)', [session['id']])
     role = cur.fetchone()[0]
 
-    if not role in ["Administrativo", 'Médico']:
+    if not role in ["Administrativo", 'Médico', 'Enfermero']:
         flash('No se tienen los permisos suficientes para acceder a esta página', 'alert')
         return redirect(url_for('main.index'))
 

@@ -23,6 +23,7 @@ def searchRedirector():
         perfiles = cur.fetchall()
         return render_template('search.html',role=role,perfiles=perfiles)
 
+    flash('No se tienen los permisos suficientes para acceder a esta página', 'alert')
     return redirect(url_for('main.index'))
 
 @search.route('/search', methods=['POST'])
@@ -48,6 +49,17 @@ def searchRedirectorPost():
 
 @search.route('/search/result')
 def searchResult():
+    if not session:
+        return redirect(url_for('auth.login'))
+
+    cur = db.connection.cursor()
+    cur.execute('call getRole(%s)', [session['id']])
+    role = cur.fetchone()[0]
+
+    if not role in ['Administrativo', 'Médico', 'Enfermero']:
+        flash('No se cuentan con los permisos suficientes para acceder a esta página', 'alert')
+        return redirect(url_for('main.index'))
+
     cedula = request.args.get('cedula')
     role = request.args.get('rol')
     cur = db.connection.cursor()
@@ -105,3 +117,34 @@ def searchResult():
         profileInfo = cur.fetchone()
 
     return render_template('searchResult.html', profileInfo=profileInfo, horario=horario, role=role, especialidad=especialidad, ubicacion=ubicacion, eps=eps)
+
+@search.route('/search/equipment')
+def searchEquipment():
+    if not session:
+        return redirect(url_for('auth.login'))
+
+    cur = db.connection.cursor()
+    cur.execute('call getRole(%s)', [session['id']])
+    role = cur.fetchone()[0]
+
+    if not role in ['Administrativos', 'Ingeniero']:
+        flash('No se tienen los permisos suficientes para acceder a esta página', 'alert')
+
+    cur.execute('call getAllEquipment()')
+    equipos = cur.fetchall()
+
+    cur.execute('select * from tipoEquipo')
+    tiposEquipo = cur.fetchall()
+
+    return render_template('searchEquipment.html', equipos=equipos, tiposEquipo=tiposEquipo)
+
+@search.route('/search/equipment', methods=['POST'])
+def searchEquipmentPost():
+    cur = db.connection.cursor()
+    cur.execute('call getEquipmentSearch(%s)', [request.form['tipo']])
+    equipos = cur.fetchall()
+
+    cur.execute('select * from tipoEquipo')
+    tiposEquipo = cur.fetchall()
+
+    return render_template('searchEquipment.html', equipos=equipos, tiposEquipo=tiposEquipo)

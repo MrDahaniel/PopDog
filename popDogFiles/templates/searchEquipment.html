@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+<div class="{{ category }}" style="margin-top: 50px; margin-bottom: 15px;">
+    <div class="flash">
+        <p>{{ message }}</p>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="box">
+    <div class="editRoles">
+        <div class="row">
+            <div class="username">
+                <div class="column">
+                    mantenimiento
+                </div>
+            </div>
+            <div class="column">
+                <img style="width: 200px; margin-right: 250px;"
+                    src="{{ url_for('static', filename='images/SMlogo.png') }}">
+            </div>
+        </div>
+        <hr>
+        <form action="{{ url_for('search.searchEquipment') }}" method="POST">
+            <div class="input-container" style="margin-top: 50px;">
+                <h4>Buscar equipos por tipo</h4>
+                <div class="row">
+                    <div class="column">
+                        <select name="tipo">
+                            {% for tipoEquipo in tiposEquipo %}
+                            <option value="{{tipoEquipo.0}}">{{tipoEquipo.1}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="column" style="flex: none;">
+                        <button type="submit" class="btn" style="margin-top: auto;">Buscar</button>
+                    </div>
+                    <div class="column" style="flex: none;">
+                        <a href="{{url_for('search.searchEquipment')}}"><button type="button" class="btn" style="margin-top: auto;">Reset</button></a>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <hr>
+        <h1>Ordenes de mantenimiento pendientes</h1>
+        <table class="basicTable">
+            <thead>
+                <tr>
+                    <th> Id equipo </th>
+                    <th> Tipo equipo </th>
+                    <th> Ubicación </th>
+                </tr>
+            </thead>
+            {% for equipo in equipos %}
+            <tr>
+                <td> {{equipo.1}} </td>
+                <td> {{equipo.0}} </td>
+                <td> {{equipo.4}}, {{equipo.2}} {{equipo.3}} </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}

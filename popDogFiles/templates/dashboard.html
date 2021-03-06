@@ -101,6 +101,52 @@
                 </a>
             </div>
         </div>
+        
+        {% elif role == 'Enfermero' %}
+        <div class="row">
+            <div class="column" style="flex: 50%;">
+                <a href="{{ url_for('search.searchRedirector') }}">
+                    <div class="block">
+                        <strong>Buscar pacientes</strong>
+                    </div>
+                </a>
+            </div>
+            <div class="column" style="flex: 50%;">
+                <a href="{{ url_for('inventory.inv') }}">
+                    <div class="block">
+                        <strong>Revisar inventario</strong>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column" style="flex: 50%;">
+                <a href="{{ url_for('patients.patientsHandle') }}">
+                    <div class="block">
+                        <strong>Ingresar pacientes</strong>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% elif role == 'Ingeniero' %}
+        <div class="row">
+            <div class="column" style="flex: 100%;">
+                <a href="{{ url_for('search.searchEquipment') }}">
+                    <div class="block">
+                        <strong>Buscar equipos</strong>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column" style="flex: 100%;">
+                <a href="{{ url_for('maintenance.maintenanceMain') }}">
+                    <div class="block">
+                        <strong>Ordenes de mantenimiento</strong>
+                    </div>
+                </a>
+            </div>
+        </div>
         {% endif %}
     </div>
 </div>

@@ -399,10 +399,11 @@ delimiter $$
 create procedure getAllEquipment(
 )
 begin
-    select te.nombreTipEqu, e.idEquipo, tu.nombreTipUbi, u.nombreUbi from equipo as e 
+    select te.nombreTipEqu, e.idEquipo, tu.nombreTipUbi, u.nombreUbi, s.nombreSector from equipo as e 
     inner join tipoEquipo as te on te.idTipEqu = e.idTipEqu 
     inner join ubicacion as u on u.idUbicacion = e.idUbicacion
-    inner join tipoUbicacion as tu on tu.idTipUbi = u.idTipUbi;
+    inner join tipoUbicacion as tu on tu.idTipUbi = u.idTipUbi
+    inner join sector as s on s.idSector = u.idSector;
 end $$
 
 delimiter ;
@@ -439,7 +440,9 @@ begin
     inner join pacientes as p on p.idPaciente = s.idPaciente
     inner join perfiles as pe on pe.cedula = p.cedula
     inner join medico as m on m.idMedico = s.idMedicoAut
-    inner join perfiles as peM on pem.cedula = m.cedula;
+    inner join perfiles as peM on pem.cedula = m.cedula
+    order by s.idSalidas desc
+    limit 15;
 end $$
 
 delimiter ;
@@ -480,6 +483,24 @@ begin
     inner join medico as m on m.idMedico = s.idMedicoAut
     inner join perfiles as peM on pem.cedula = m.cedula
     where pe.cedula = ced;
+end $$
+
+delimiter ;
+
+-- Trae toda la información de los equipos (Busqueda!)
+
+delimiter $$
+
+create procedure getEquipmentSearch(
+    in tipo int
+)
+begin
+    select te.nombreTipEqu, e.idEquipo, tu.nombreTipUbi, u.nombreUbi, s.nombreSector from equipo as e 
+    inner join tipoEquipo as te on te.idTipEqu = e.idTipEqu 
+    inner join ubicacion as u on u.idUbicacion = e.idUbicacion
+    inner join tipoUbicacion as tu on tu.idTipUbi = u.idTipUbi
+    inner join sector as s on s.idSector = u.idSector
+    where te.idTipEqu = tipo;
 end $$
 
 delimiter ;

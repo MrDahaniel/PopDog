@@ -66,14 +66,40 @@ def medic():
     
     return render_template('dashboard.html', role=role)
 
-#@dashboard.route() 
-#def engie():
+@dashboard.route('/dashboard/engie') 
+def engie():
+    if not session:
+        return redirect(url_for('auth.login'))
+
+    cur = db.connection.cursor()
+    cur.execute('call getRole(%s)', [session['id']])
+    role = cur.fetchone()[0]
+    cur.close()
+    
+    if role != 'Ingeniero':
+        flash('No se tienen los permisos suficientes para acceder a esta página', 'alert')
+        return redirect(url_for('main.index'))
+    
+    return render_template('dashboard.html', role=role)
 
 #@dashboard.route() 
 #def sergen():
 
-#@dashboard.route() 
-#def nurse():
+@dashboard.route('/dashboard/nurse') 
+def nurse():
+    if not session:
+        return redirect(url_for('auth.login'))
+
+    cur = db.connection.cursor()
+    cur.execute('call getRole(%s)', [session['id']])
+    role = cur.fetchone()[0]
+    cur.close()
+    
+    if role != 'Enfermero':
+        flash('No se tienen los permisos suficientes para acceder a esta página', 'alert')
+        return redirect(url_for('main.index'))
+    
+    return render_template('dashboard.html', role=role)
 
 #@dashboard.route() 
 #def patient():
