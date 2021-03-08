@@ -1,6 +1,3 @@
---Este script existe con el fin de mantener consistentes las tablas entre las diferentes personas 
---Lo ideal sería tener una base de datos hosteada pero dudo que podamos hacer eso lol
-
 create database popdogdb;
 
 use popdogdb;
@@ -33,8 +30,8 @@ create table tipoUbicacion(
 
 create table ubicacion(
     idUbicacion serial primary key,
-    idTipUbi int references tipoUbicacion(idTipUbi),
-    idSector int references sector(idSector),
+    idTipUbi BIGINT UNSIGNED, foreign key(idTipUbi) references tipoUbicacion(idTipUbi),
+    idSector BIGINT UNSIGNED, foreign key(idSector) references sector(idSector),
     nombreUbi varchar(150) not null
 );
 
@@ -45,22 +42,22 @@ create table especialidad(
 
 create table medico(
     idMedico serial primary key, 
-    cedula int references perfiles(cedula),
-    idEspecialidad int references especialidad(idEspecialidad),
-    idHorario int references horario(idHorario)
+    cedula int, foreign key(cedula) references perfiles(cedula),
+    idEspecialidad BIGINT UNSIGNED, foreign key(idEspecialidad) references especialidad(idEspecialidad),
+    idHorario BIGINT UNSIGNED, foreign key(idHorario) references horario(idHorario)
 );
 
 create table enfermeras(
     idEnfermera serial primary key,
-    cedula int references perfiles(cedula),
-    idHorario int references horario(idHorario),
-    idUbicacion int references ubicacion(idUbicacion)
+    cedula int, foreign key(cedula) references perfiles(cedula),
+    idHorario BIGINT UNSIGNED, foreign key(idHorario) references horario(idHorario),
+    idUbicacion BIGINT UNSIGNED, foreign key(idUbicacion) references ubicacion(idUbicacion)
 );
 
 create table serviciosGenerales(
     idSerGen serial primary key,
-    cedula int references perfiles(cedula),
-    idHorario int references horario(idHorario)
+    cedula int, foreign key(cedula) references perfiles(cedula),
+    idHorario BIGINT UNSIGNED, foreign key(idHorario) references horario(idHorario)
 );
 
 create table tipoServicio(
@@ -70,8 +67,8 @@ create table tipoServicio(
 
 create table ingenieros(
     idIngeniero serial primary key, 
-    cedula int references perfiles(cedula),
-    idHorario int references horario(idHorario)
+    cedula int, foreign key(cedula) references perfiles(cedula),
+    idHorario BIGINT UNSIGNED, foreign key(idHorario) references horario(idHorario)
 );
 
 create table tipoEquipo(
@@ -81,14 +78,14 @@ create table tipoEquipo(
 
 create table equipo(
     idEquipo serial primary key, 
-    idUbicacion int references ubicacion(idUbicacion),
-    idTipEqu int references tipoEquipo(idTipEqu)
+    idUbicacion BIGINT UNSIGNED, foreign key(idUbicacion) references ubicacion(idUbicacion),
+    idTipEqu BIGINT UNSIGNED, foreign key(idTipEqu) references tipoEquipo(idTipEqu)
 );
 
 create table ordenMantenimiento(
     idOrdenMantenimiento serial primary key,
-    idEquipo int references equipo(idEquipo),
-    idIngeniero int references ingenieros(idIngeniero),
+    idEquipo BIGINT UNSIGNED, foreign key(idEquipo) references equipo(idEquipo),
+    idIngeniero BIGINT UNSIGNED, foreign key(idIngeniero) references ingenieros(idIngeniero),
     ordenCompletada boolean default false
 );
 
@@ -100,22 +97,22 @@ create table proveedores(
 
 create table administrativos(
     idAdministrativo serial primary key,
-    cedula int references perfiles(cedula),
-    idHorario int references horario(idHorario),
+    cedula int, foreign key(cedula) references perfiles(cedula),
+    idHorario BIGINT UNSIGNED, foreign key(idHorario) references horario(idHorario),
     areaAsig varchar(150)
 );
 
 create table item(
     idItem serial primary key,
-    idProveedor int references proveedores(idProveedor),
+    idProveedor BIGINT UNSIGNED, foreign key(idProveedor) references proveedores(idProveedor),
     nombre varchar(150),
     cantidad int
 );
 
 create table Pedidos(
     idPedido serial primary key,
-    idItem int references item(idItem),
-    idAdministrativo int references administrativos(idAdministrativo),
+    idItem BIGINT UNSIGNED, foreign key(idItem) references item(idItem),
+    idAdministrativo BIGINT UNSIGNED, foreign key(idAdministrativo) references administrativos(idAdministrativo),
     cantidad int not null, 
     fecha date 
 );
@@ -126,17 +123,17 @@ create table EPS(
 );
 
 create table historialMedico(
-    idHistorial int primary key,
+    idHistorial serial primary key,
     fechaSubida date not null,
     documento blob 
 );
 
 create table pacientes(
     idPaciente serial primary key,
-    cedula int references perfiles(cedula),
-    idUbicacion int references ubicacion(idUbicacion),
-    idEPS int references EPS(idEPS),
-    idHistorial int references historialMedico(idHistorial),
+    cedula int, foreign key(cedula) references perfiles(cedula),
+    idUbicacion BIGINT UNSIGNED, foreign key(idUbicacion) references ubicacion(idUbicacion),
+    idEPS BIGINT UNSIGNED, foreign key(idEPS) references EPS(idEPS),
+    idHistorial BIGINT UNSIGNED, foreign key(idHistorial) references historialMedico(idHistorial),
     peso float
 );
 
@@ -147,8 +144,8 @@ create table medioEntrada(
 
 create table ingresos(
     idIngreso serial primary key,
-    idPaciente int references pacientes(idPaciente),
-    idMedio int references medioEntrada(idMedio),
+    idPaciente BIGINT UNSIGNED, foreign key(idPaciente) references pacientes(idPaciente),
+    idMedio BIGINT UNSIGNED, foreign key(idMedio) references medioEntrada(idMedio),
     fecha date,
     hora time, 
     estado boolean default false
@@ -156,8 +153,8 @@ create table ingresos(
 
 create table salidas(
     idSalidas serial primary key, 
-    idPaciente int references pacientes(idPaciente),
-    idMedicoAut int references medico(idMedico),
+    idPaciente BIGINT UNSIGNED, foreign key(idPaciente) references pacientes(idPaciente),
+    idMedicoAut BIGINT UNSIGNED, foreign key(idMedicoAut) references medico(idMedico),
     fecha date,
     hora time
 );
