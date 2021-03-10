@@ -12,7 +12,7 @@ def infobay():
     cur.execute('call getRole(%s)', [session['id']])
     role = cur.fetchone()[0]
 
-    if not role in ['Médico', 'Enfermero', 'Paciente']:
+    if not role in ['Médico', 'Enfermero', 'Paciente', 'Servicios']:
         return redirect(url_for('main.index'))
 
     return render_template('infobay.html',role=role)

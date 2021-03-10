@@ -64,19 +64,6 @@ end $$
 
 delimiter ;
 
--- Trae el rol del usuario actual
-
-delimiter $$
-
-create procedure (
-    in ced int
-)
-begin
-    select role from perfiles where cedula = ced;
-end $$
-
-delimiter ;
-
 -- Trae todos los perfiles sin rol  
 
 delimiter $$
@@ -359,7 +346,7 @@ end $$
 
 delimiter ;
 
---Trae el rol del usuario en sessión actual
+-- Trae el rol del usuario en sessión actual
 
 delimiter $$
 
@@ -368,7 +355,7 @@ create procedure getRole(
 )  
 begin
     select role from perfiles where cedula = ced;
-end
+end $$
 
 delimiter ;
 

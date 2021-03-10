@@ -12,7 +12,7 @@ def createApp():
     app.config['MYSQL_HOST'] = 'localhost'
     app.config['MYSQL_USER'] = 'root'
     app.config['MYSQL_PASSWORD'] = ''
-    app.config['MYSQL_DB'] = 'popdogdb'
+    app.config['MYSQL_DB'] = 'testio'
 
     db.init_app(app)
 

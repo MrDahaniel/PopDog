@@ -19,6 +19,7 @@ def searchLocationPost():
 
     profileInfo=None
     showProfile=False
+    ubicacion=None
 
     cedula = request.form['cedula']
     sector = request.form['sector']

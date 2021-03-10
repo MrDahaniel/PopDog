@@ -133,7 +133,7 @@ create table pacientes(
     cedula int, foreign key(cedula) references perfiles(cedula),
     idUbicacion BIGINT UNSIGNED, foreign key(idUbicacion) references ubicacion(idUbicacion),
     idEPS BIGINT UNSIGNED, foreign key(idEPS) references EPS(idEPS),
-    idHistorial BIGINT UNSIGNED, foreign key(idHistorial) references historialMedico(idHistorial),
+    idHistorial BIGINT UNSIGNED references historialMedico(idHistorial),
     peso float
 );
 
@@ -157,11 +157,4 @@ create table salidas(
     idMedicoAut BIGINT UNSIGNED, foreign key(idMedicoAut) references medico(idMedico),
     fecha date,
     hora time
-);
-
-create table messageBoard(
-    idMensaje serial primary key,
-    idAdministrativo BIGINT UNSIGNED, foreign key(idAdministrativo) references administrativos(idAdministrativo),
-    mensaje text,
-    fecha date
 );
