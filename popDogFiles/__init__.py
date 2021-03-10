@@ -48,4 +48,7 @@ def createApp():
     from .patients import patients as patientsBlueprint
     app.register_blueprint(patientsBlueprint)
 
+    from .information import information as informationBlueprint
+    app.register_blueprint(informationBlueprint)
+
     return app

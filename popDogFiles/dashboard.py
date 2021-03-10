@@ -82,7 +82,7 @@ def engie():
     
     return render_template('dashboard.html', role=role)
 
-#@dashboard.route() 
+#@dashboard.route('/dashboard/sergen') 
 #def sergen():
 
 @dashboard.route('/dashboard/nurse') 
@@ -101,5 +101,18 @@ def nurse():
     
     return render_template('dashboard.html', role=role)
 
-#@dashboard.route() 
-#def patient():
+@dashboard.route('/dashboard/patient') 
+def patient():
+    if not session:
+        return redirect(url_for('auth.login'))
+
+    cur = db.connection.cursor()
+    cur.execute('call getRole(%s)', [session['id']])
+    role = cur.fetchone()[0]
+    cur.close()
+    
+    if role != 'Paciente':
+        flash('No se tienen los permisos suficientes para acceder a esta página', 'alert')
+        return redirect(url_for('main.index'))
+
+    return render_template('dashboard.html', role=role)

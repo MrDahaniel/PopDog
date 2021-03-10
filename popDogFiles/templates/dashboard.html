@@ -100,6 +100,13 @@
                     </div>
                 </a>
             </div>
+            <div class="column" style="flex: 50%;">
+                <a href="{{ url_for('information.infobay') }}">
+                    <div class="block">
+                        <strong>Ver tablero de anuncios</strong>
+                    </div>
+                </a>
+            </div>
         </div>
         
         {% elif role == 'Enfermero' %}
@@ -127,6 +134,13 @@
                     </div>
                 </a>
             </div>
+            <div class="column" style="flex: 50%;">
+                <a href="{{ url_for('information.infobay') }}">
+                    <div class="block">
+                        <strong>Ver tablero de anuncios</strong>
+                    </div>
+                </a>
+            </div>
         </div>
         {% elif role == 'Ingeniero' %}
         <div class="row">
@@ -143,6 +157,26 @@
                 <a href="{{ url_for('maintenance.maintenanceMain') }}">
                     <div class="block">
                         <strong>Ordenes de mantenimiento</strong>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% elif role == 'Paciente' %}
+        <div class="row">
+            <div class="column" style="flex: 50%;">
+                <a href="{{ url_for('information.infobay') }}">
+                    <div class="block">
+                        <strong>Ver tablero de anuncios</strong>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% elif role == 'Servicios' %}
+        <div class="row">
+            <div class="column" style="flex: 50%;">
+                <a href="{{ url_for('information.infobay') }}">
+                    <div class="block">
+                        <strong>Ver tablero de anuncios</strong>
                     </div>
                 </a>
             </div>

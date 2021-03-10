@@ -1,6 +1,6 @@
 from flask import Flask, Blueprint, render_template, url_for, redirect, session, request
 from flask.helpers import flash
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import check_password_hash
 from .__init__ import db
 
 userhandle = Blueprint('userhandle', __name__, template_folder='templates', static_folder='static')

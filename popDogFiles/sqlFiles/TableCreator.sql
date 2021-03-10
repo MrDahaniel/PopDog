@@ -158,3 +158,10 @@ create table salidas(
     fecha date,
     hora time
 );
+
+create table messageBoard(
+    idMensaje serial primary key,
+    idAdministrativo BIGINT UNSIGNED, foreign key(idAdministrativo) references administrativos(idAdministrativo),
+    mensaje text,
+    fecha date
+);
