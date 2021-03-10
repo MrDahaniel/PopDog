@@ -8,9 +8,6 @@ Repositorio dedicado al proyecto final de base de datos 2.
 
 ### TODO:
 
-- Implementación de:
-    - Pacientes.
-    - Servicios generales.
 - Reformar la Gran Colombia
 - Recuperar Panamá
 
